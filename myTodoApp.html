@@ -3,19 +3,23 @@
 </head>
 
 <body>
-	{{> addItem}}
+	{{> addCommitment}}
 
-	{{#each commitments}}
-		{{> commitment}}
-	{{/each}}
+	<ul>
+		{{#each commitments}}
+			{{> commitment}}
+		{{/each}}
+	</ul>
 
 </body>
 
 
 
 
-<template name="addItem">
-	<input type="text" placeholder="Add a new commitment" />
+<template name="addCommitment">
+	<form>
+		<input type="text" name="name" placeholder="Add a new commitment" />
+	</form>
 </template>
 
 <template name="commitment">
