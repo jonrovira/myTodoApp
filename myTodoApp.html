@@ -1,0 +1,23 @@
+<head>
+	<title>My Special Todo App</title>
+</head>
+
+<body>
+	{{> addItem}}
+
+	{{#each commitments}}
+		{{> commitment}}
+	{{/each}}
+
+</body>
+
+
+
+
+<template name="addItem">
+	<input type="text" placeholder="Add a new commitment" />
+</template>
+
+<template name="commitment">
+	<li>{{name}}</li>
+</template>
