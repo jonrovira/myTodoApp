@@ -18,7 +18,14 @@
 <!-- Add commitment form -->
 <template name="addCommitment">
 	<form>
-		<input type="text" name="name" placeholder="Add a new commitment" />
+		<input type="text" name="commitment" placeholder="Add a new commitment" />
+	</form>
+</template>
+
+<!-- Add task form -->
+<template name="addTask">
+	<form>
+		<input type="text" name="task" placeholder="Add a new commitment" />
 	</form>
 </template>
 
@@ -27,6 +34,27 @@
 	<li class="{{#if checked}}checked{{/if}}">
 		<button class="delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-		<span class="name">{{name}}</span>
+		<span class="commitment">{{commitment}}</span>
+		{{> addTask}}
+		<ul>
+			{{#each tasks}}
+				{{> task}}
+			{{/each}}
+		</ul>
 	</li>
+</template>
+
+<!-- Task item -->
+<template name="task">
+	<li>
+		{{task}}
+	</li>
+</template>
+
+<!-- Hide completed option -->
+<template name="hideCompleted">
+	<label class="hide-completed">
+	  	<input type="checkbox" checked="{{hideCompleted}}" />
+	  	Hide Completed Tasks
+	</label>
 </template>
