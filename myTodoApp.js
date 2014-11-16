@@ -9,7 +9,7 @@ if (Meteor.isClient) {
         }
     });
     Template.addCommitment.events({
-        "submit form": function (event) {
+        "submit form": function(event) {
 
             // Get new commitment name
             var text = event.target.name.value;
@@ -23,6 +23,15 @@ if (Meteor.isClient) {
             // Cleanup: Clear input, void default submit
             event.target.name.value = "";
             return false;
+        }
+    });
+    Template.commitment.events({
+        "click .toggle-checked": function() {
+            Commitments.update(this._id, {$set: {checked: ! this.checked}});
+        },
+        "click .delete": function() {
+            console.log('hi');
+            Commitments.remove(this._id);
         }
     });
 }
