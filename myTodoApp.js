@@ -4,6 +4,9 @@ Tasks       = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
 
+    Meteor.subscribe("commitments");
+    Meteor.subscribe("tasks");
+
     /* body */
     Template.body.helpers({
         commitments: function() {
@@ -39,10 +42,7 @@ if (Meteor.isClient) {
             var text = event.target.commitment.value;
 
             // Add commitment to commitments collection
-            Commitments.insert({
-                commitment: text,
-                createdAt: new Date()
-            });
+            Meteor.call("addCommitment", text);
 
             // Cleanup: clear input, void default submit
             event.target.commitment.value = "";
@@ -60,7 +60,9 @@ if (Meteor.isClient) {
             // Add task to tasks collection
             Tasks.insert({
                 task: task,
-                createdAt: new Date() 
+                createdAt: new Date(),
+                owner: Meteor.userId(),
+                username: Meteor.user().username
             });
 
             // Cleanup: clear input, void default submit
@@ -73,6 +75,9 @@ if (Meteor.isClient) {
     Template.commitment.helpers({
         tasks: function() {
             return Tasks.find({}, {sort: {createdAt: -1}});
+        },
+        isOwner: function() {
+            return this.owner === Meteor.userId();
         }
     });
     Template.commitment.events({
@@ -81,6 +86,9 @@ if (Meteor.isClient) {
         },
         "click .delete": function() {   
             Commitments.remove(this._id);
+        },
+        "click .toggle-private": function() {
+            Meteor.call("setPrivate", this._id, ! this.private);
         }
     });
 
@@ -93,12 +101,78 @@ if (Meteor.isClient) {
             Tasks.remove(this._id);
         }
     });
+
+    /* Meteor Accounts */
+    Accounts.ui.config({
+        passwordSignupFields: "USERNAME_ONLY"
+    });
 }
+
+
+Meteor.methods({
+    addCommitment: function (text) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        Commitments.insert({
+            commitment: text,
+            createdAt: new Date(),
+            owner: Meteor.userId(),
+            username: Meteor.user().username
+        });
+    },
+    deleteCommitment: function (commitmentId) {
+        var commitment = Commitments.findOne(commitmentId);
+
+        if (commitment.private && commitment.owner !== Meteor.userId()) {
+            // If the commitment is private, make sure only the owner can delete it
+            throw new Meteor.Error("not-authorized");
+        }
+        Commitments.remove(commitmentId);
+    },
+    setChecked: function (commitmentId, setChecked) {
+        var commitment = Commitments.findOne(commitmentId);
+
+        if (commitment.private && commitment.owner !== Meteor.userId()) {
+            // If the commitment is private, make sure only the owner can check it off
+            throw new Meteor.Error("not-authorized");
+        }
+        
+        Commitments.update(commitmentId, { $set: { checked: setChecked} });
+    },
+    setPrivate: function (commitmentId, setToPrivate) {
+        var commitment = Commitments.findOne(commitmentId);
+
+        if (commitment.owner !== Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        Commitments.update(commitmentId, { $set: { private: setToPrivate } });
+    }
+});
 
 
 
 
 if (Meteor.isServer) {
+
+    /* Publishers */
+    Meteor.publish("commitments", function() {
+        return Commitments.find({
+            $or: [
+                { private: {$ne: true} },
+                { owner: this.userId }
+            ]
+        });
+    });
+    Meteor.publish("tasks", function() {
+        return Tasks.find();
+    });
+
+
+
     Meteor.startup(function () {
         // code to run on server at startup
     });

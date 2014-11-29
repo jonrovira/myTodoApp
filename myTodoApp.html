@@ -6,6 +6,7 @@
 	<h1>Jon Rovira's Todo List ({{incompleteCount}})</h1>
 	{{> addCommitment}}
 	{{> hideCompleted}}
+	{{> loginButtons}}
 
 	<ul>
 		{{#each commitments}}
@@ -26,24 +27,37 @@
 
 <!-- Add commitment form -->
 <template name="addCommitment">
-	<form>
-		<input type="text" name="commitment" placeholder="Add a new commitment" />
-	</form>
+	{{#if currentUser}}
+		<form>
+			<input type="text" name="commitment" placeholder="Add a new commitment" />
+		</form>
+	{{/if}}
 </template>
 
 <!-- Add task form -->
 <template name="addTask">
-	<form>
-		<input type="text" name="task" placeholder="Add a new commitment" />
-	</form>
+	{{#if currentUser}}
+		<form>
+			<input type="text" name="task" placeholder="Add a new commitment" />
+		</form>
+	{{/if}}
 </template>
 
 <!-- Commitment item -->
 <template name="commitment">
-	<li class="{{#if checked}}checked{{/if}}">
+	<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
 		<button class="delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-		<span class="commitment">{{commitment}}</span>
+		{{#if isOwner}}
+			<button class="toggle-private">
+				{{#if private}}
+					Private
+				{{else}}
+					Public
+				{{/if}}
+			</button>
+		{{/if}}
+		<span class="commitment"><strong>{{username}}</strong> - {{commitment}}</span>
 		{{> addTask}}
 		<ul>
 			{{#each tasks}}
@@ -58,6 +72,6 @@
 	<li>
 		<button class="delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-		<span class="task">{{task}}</span>
+		<span class="task"><strong>{{username}}</strong> - {{task}}</span>
 	</li>
 </template>
