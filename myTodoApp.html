@@ -45,7 +45,7 @@
 
 <!-- Commitment item -->
 <template name="commitment">
-	<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+	<li id="{{commitment}}" class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
 		<button class="commitment-delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" />
 		{{#if isOwner}}
@@ -57,7 +57,7 @@
 				{{/if}}
 			</button>
 		{{/if}}
-		<span class="commitment"><strong>{{username}}</strong> - {{commitment}}</span>
+		<span class="commitment">{{commitment}}</span>
 		{{> addTask}}
 		<ul>
 			{{#each tasks}}
@@ -72,6 +72,6 @@
 	<li>
 		<button class="task-delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="task-toggle-checked" />
-		<span class="task"><strong>{{username}}</strong> - {{task}}</span>
+		<span class="task">{{task}}</span>
 	</li>
 </template>

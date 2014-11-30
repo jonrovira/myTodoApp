@@ -52,13 +52,15 @@ if (Meteor.isClient) {
 
     /* addTask */
     Template.addTask.events({
-        "submit form": function(event) {
+        "submit form": function(event, template) {
 
             // Get new task string
-            var text = event.target.task.value;
+            var taskContent  = event.target.task.value;
+            var commitmentId = template.data._id;
+            console.log(commitmentId);
 
             // Add task to tasks collection
-            Meteor.call("addTask", text);
+            Meteor.call("addTask", taskContent, commitmentId);
 
             // Cleanup: clear input, void default submit
             event.target.task.value = "";
@@ -69,7 +71,8 @@ if (Meteor.isClient) {
     /* commitment */
     Template.commitment.helpers({
         tasks: function() {
-            return Tasks.find({}, {sort: {createdAt: -1}});
+            var commitmentId = this._id;
+            return Tasks.find({commitmentId: commitmentId}, {sort: {createdAt: -1}});
         },
         isOwner: function() {
             return this.owner === Meteor.userId();
@@ -105,14 +108,14 @@ if (Meteor.isClient) {
 
 
 Meteor.methods({
-    addCommitment: function (text) {
+    addCommitment: function (name) {
         // Make sure the user is logged in before inserting a commitment
         if (!Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
         }
 
         Commitments.insert({
-            commitment: text,
+            commitmentName: name,
             createdAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username
@@ -127,14 +130,15 @@ Meteor.methods({
         }
         Commitments.remove(commitmentId);
     },
-    addTask: function (text) {
+    addTask: function (taskContent, commitmentId) {
         // Make sure the user is logged in before inserting a task
         if (!Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
         }
 
         Tasks.insert({
-            task: text,
+            task: taskContent,
+            commitmentId: commitmentId,
             createdAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username
