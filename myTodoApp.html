@@ -21,7 +21,7 @@
 <template name="hideCompleted">
 	<label>
 	  	<input type="checkbox" checked="{{hideCompleted}}" />
-	  	Hide Completed Tasks
+	  	Hide Completed Commitments
 	</label>
 </template>
 
@@ -38,7 +38,7 @@
 <template name="addTask">
 	{{#if currentUser}}
 		<form>
-			<input type="text" name="task" placeholder="Add a new commitment" />
+			<input type="text" name="task" placeholder="Add a new task" />
 		</form>
 	{{/if}}
 </template>
@@ -46,8 +46,8 @@
 <!-- Commitment item -->
 <template name="commitment">
 	<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-		<button class="delete">&times;</button>
-		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+		<button class="commitment-delete">&times;</button>
+		<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" />
 		{{#if isOwner}}
 			<button class="toggle-private">
 				{{#if private}}
@@ -70,8 +70,8 @@
 <!-- Task item -->
 <template name="task">
 	<li>
-		<button class="delete">&times;</button>
-		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+		<button class="task-delete">&times;</button>
+		<input type="checkbox" checked="{{checked}}" class="task-toggle-checked" />
 		<span class="task"><strong>{{username}}</strong> - {{task}}</span>
 	</li>
 </template>

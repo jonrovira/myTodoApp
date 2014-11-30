@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     Template.body.helpers({
         commitments: function() {
             if (Session.get("hideCompleted")) {
-                  return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+                return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
             }
             else {
                 return Commitments.find({}, {sort: {createdAt: -1}});
@@ -55,15 +55,10 @@ if (Meteor.isClient) {
         "submit form": function(event) {
 
             // Get new task string
-            var task = event.target.task.value;
+            var text = event.target.task.value;
 
             // Add task to tasks collection
-            Tasks.insert({
-                task: task,
-                createdAt: new Date(),
-                owner: Meteor.userId(),
-                username: Meteor.user().username
-            });
+            Meteor.call("addTask", text);
 
             // Cleanup: clear input, void default submit
             event.target.task.value = "";
@@ -81,24 +76,24 @@ if (Meteor.isClient) {
         }
     });
     Template.commitment.events({
-        "click .toggle-checked": function() {
-            Commitments.update(this._id, {$set: {checked: ! this.checked}});
+        "click .commitment-toggle-checked": function() {
+            Meteor.call("setCommitmentChecked", this._id, !this.checked);
         },
-        "click .delete": function() {   
-            Commitments.remove(this._id);
+        "click .commitment-delete": function() {   
+            Meteor.call("deleteCommitment", this._id);
         },
-        "click .toggle-private": function() {
-            Meteor.call("setPrivate", this._id, ! this.private);
+        "click .commitment-toggle-private": function() {
+            Meteor.call("setPrivate", this._id, !this.private);
         }
     });
 
     /* task */
     Template.task.events({
-        "click .toggle-checked": function() {
-            Tasks.update(this._id, {$set: {checked: ! this.checked}});
+        "click .task-toggle-checked": function() {
+            Meteor.call("setTaskChecked", this._id, !this.checked);
         },
-        "click .delete": function() {
-            Tasks.remove(this._id);
+        "click .task-delete": function() {
+            Meteor.call("deleteTask", this._id);
         }
     });
 
@@ -111,8 +106,8 @@ if (Meteor.isClient) {
 
 Meteor.methods({
     addCommitment: function (text) {
-        // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
+        // Make sure the user is logged in before inserting a commitment
+        if (!Meteor.userId()) {
             throw new Meteor.Error("not-authorized");
         }
 
@@ -132,15 +127,47 @@ Meteor.methods({
         }
         Commitments.remove(commitmentId);
     },
-    setChecked: function (commitmentId, setChecked) {
+    addTask: function (text) {
+        // Make sure the user is logged in before inserting a task
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("not-authorized");
+        }
+
+        Tasks.insert({
+            task: text,
+            createdAt: new Date(),
+            owner: Meteor.userId(),
+            username: Meteor.user().username
+        });
+    },
+    deleteTask: function (taskId) {
+        var task = Tasks.findOne(taskId);
+
+        if (task.owner !== Meteor.userId()) {
+            // Make sure the task is owned by the current user
+            throw new Meteor.Error("not-authorized");
+        }
+        Tasks.remove(taskId);
+    },
+    setCommitmentChecked: function (commitmentId, setChecked) {
         var commitment = Commitments.findOne(commitmentId);
 
         if (commitment.private && commitment.owner !== Meteor.userId()) {
             // If the commitment is private, make sure only the owner can check it off
             throw new Meteor.Error("not-authorized");
         }
-        
-        Commitments.update(commitmentId, { $set: { checked: setChecked} });
+
+        Commitments.update(commitmentId, {$set: {checked: setChecked} });
+    },
+    setTaskChecked: function (taskId, setChecked) {
+        var task = Tasks.findOne(taskId);
+
+        if (task.owner !== Meteor.userId()) {
+            // Make sure owner is current user
+            throw new Meteor.Error("not-authorized");
+        }
+
+        Tasks.update(taskId, { $set: { checked: setChecked} });
     },
     setPrivate: function (commitmentId, setToPrivate) {
         var commitment = Commitments.findOne(commitmentId);
