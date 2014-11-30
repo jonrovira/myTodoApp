@@ -14,6 +14,9 @@
 		{{/each}}
 	</ul>
 
+	<hr>
+	{{> twilioPlayground}}
+
 </body>
 
 
@@ -74,4 +77,10 @@
 		<input type="checkbox" checked="{{checked}}" class="task-toggle-checked" />
 		<span class="task">{{task}}</span>
 	</li>
+</template>
+
+<!-- Meteor playground -->
+<template name="twilioPlayground">
+	<button class="send">Click to send a text!</button>
+	<button class="list">Click to list texts</button>
 </template>
