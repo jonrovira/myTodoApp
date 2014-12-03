@@ -8,7 +8,7 @@ if (Meteor.isClient) {
     Meteor.subscribe("tasks");
 
     /* body */
-    Template.body.helpers({
+    Template.home.helpers({
         commitments: function() {
             if (Session.get("hideCompleted")) {
                 return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
@@ -113,8 +113,11 @@ if (Meteor.isClient) {
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_ONLY"
     });
-}
 
+    Router.route('/', function () {
+      this.render('home');
+    });
+}
 
 
 
@@ -242,7 +245,6 @@ if (Meteor.isServer) {
             });
         }
     });
-
 
 
     Meteor.startup(function () {

@@ -2,7 +2,11 @@
 	<title>My Special Todo App</title>
 </head>
 
-<body>
+<body></body>
+
+
+<!-- Home route -->
+<template name="home">
 	<h1>Jon Rovira's Todo List ({{incompleteCount}})</h1>
 	{{> addCommitment}}
 	{{> hideCompleted}}
@@ -16,9 +20,7 @@
 
 	<hr>
 	{{> twilioPlayground}}
-
-</body>
-
+</template>
 
 <!-- Hide completed option -->
 <template name="hideCompleted">
@@ -48,7 +50,7 @@
 
 <!-- Commitment item -->
 <template name="commitment">
-	<li id="{{commitment}}" class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+	<li id="{{commitmentName}}" class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
 		<button class="commitment-delete">&times;</button>
 		<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" />
 		{{#if isOwner}}
@@ -60,7 +62,7 @@
 				{{/if}}
 			</button>
 		{{/if}}
-		<span class="commitment">{{commitment}}</span>
+		<span class="commitment">{{commitmentName}}</span>
 		{{> addTask}}
 		<ul>
 			{{#each tasks}}

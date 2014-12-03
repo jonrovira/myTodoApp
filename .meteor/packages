@@ -9,3 +9,5 @@ accounts-password
 http
 mrt:moment
 mrt:twilio-meteor
+iron:router
+
