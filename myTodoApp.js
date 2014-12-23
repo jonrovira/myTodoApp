@@ -113,10 +113,6 @@ if (Meteor.isClient) {
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_ONLY"
     });
-
-    Router.route('/', function () {
-      this.render('home');
-    });
 }
 
 
@@ -251,5 +247,27 @@ if (Meteor.isServer) {
         // code to run on server at startup
     });
 }
+
+
+/* Routes */
+Router.route('/', function () {
+    this.render('home');
+});
+
+Router.route('/text/', function(){
+    this.response.statusCode = 200;
+    this.response.setHeader("Content-Type", "application/json");
+    this.response.setHeader("Access-Control-Allow-Origin", "*");
+    this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    if (this.request.method == 'GET') {
+        Meteor.call("sendSMS");
+        this.response.end(JSON.stringify("success!"));
+    }
+    else if (this.request.method == 'POST') {
+        Meteor.call("sendSMS");
+        this.response.end(JSON.stringify("success!"));
+    }
+}, {where: 'server'});
 
 
