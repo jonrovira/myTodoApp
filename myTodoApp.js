@@ -115,12 +115,7 @@ if (Meteor.isServer) {
 
     /* Publishers */
     Meteor.publish("commitments", function() {
-        return Commitments.find({
-            $or: [
-                { private: {$ne: true} },
-                { owner: this.userId }
-            ]
-        });
+        return Commitments.find();
     });
     Meteor.publish("tasks", function() {
 
@@ -131,78 +126,33 @@ if (Meteor.isServer) {
     /* Methods */
     Meteor.methods({
         addCommitment: function (name) {
-            // Make sure the user is logged in before inserting a commitment
-            if (!Meteor.userId()) {
-                throw new Meteor.Error("not-authorized");
-            }
-
             Commitments.insert({
                 commitmentName: name,
-                createdAt: new Date(),
-                owner: Meteor.userId(),
-                username: Meteor.user().username
+                createdAt: new Date()
             });
         },
         deleteCommitment: function (commitmentId) {
             var commitment = Commitments.findOne(commitmentId);
-
-            if (commitment.private && commitment.owner !== Meteor.userId()) {
-                // If the commitment is private, make sure only the owner can delete it
-                throw new Meteor.Error("not-authorized");
-            }
             Commitments.remove(commitmentId);
         },
         addTask: function (taskContent, commitmentId) {
-            // Make sure the user is logged in before inserting a task
-            if (!Meteor.userId()) {
-                throw new Meteor.Error("not-authorized");
-            }
-
             Tasks.insert({
                 task: taskContent,
                 commitmentId: commitmentId,
                 createdAt: new Date(),
-                owner: Meteor.userId(),
-                username: Meteor.user().username
             });
         },
         deleteTask: function (taskId) {
             var task = Tasks.findOne(taskId);
-
-            if (task.owner !== Meteor.userId()) {
-                // Make sure the task is owned by the current user
-                throw new Meteor.Error("not-authorized");
-            }
             Tasks.remove(taskId);
         },
         setCommitmentChecked: function (commitmentId, setChecked) {
             var commitment = Commitments.findOne(commitmentId);
-
-            if (commitment.private && commitment.owner !== Meteor.userId()) {
-                // If the commitment is private, make sure only the owner can check it off
-                throw new Meteor.Error("not-authorized");
-            }
-
             Commitments.update(commitmentId, {$set: {checked: setChecked} });
         },
         setTaskChecked: function (taskId, setChecked) {
             var task = Tasks.findOne(taskId);
-
-            if (task.owner !== Meteor.userId()) {
-                // Make sure owner is current user
-                throw new Meteor.Error("not-authorized");
-            }
-
             Tasks.update(taskId, { $set: { checked: setChecked} });
-        },
-        setPrivate: function (commitmentId, setToPrivate) {
-            var commitment = Commitments.findOne(commitmentId);
-
-            if (commitment.owner !== Meteor.userId()) {
-                throw new Meteor.Error("not-authorized");
-            }
-
-            Commitments.update(commitmentId, { $set: { private: setToPrivate } });
         },
         sendSMS: function () {
             twilio = Twilio('ACb1ab2eb7e44612d7dfa05a6679792ed3', '631a30a7f6f2c1d59ea35419197b70da');
