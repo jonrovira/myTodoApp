@@ -72,9 +72,6 @@ if (Meteor.isClient) {
         tasks: function() {
             var commitmentId = this._id;
             return Tasks.find({commitmentId: commitmentId}, {sort: {createdAt: -1}});
-        },
-        isOwner: function() {
-            return this.owner === Meteor.userId();
         }
     });
     Template.commitment.events({
@@ -83,9 +80,6 @@ if (Meteor.isClient) {
         },
         "click .commitment-delete": function() {   
             Meteor.call("deleteCommitment", this._id);
-        },
-        "click .commitment-toggle-private": function() {
-            Meteor.call("setPrivate", this._id, !this.private);
         }
     });
 
@@ -229,25 +223,6 @@ if (Meteor.isServer) {
                 }
             });
         },
-        listSMS: function () {
-            twilio = Twilio('ACb1ab2eb7e44612d7dfa05a6679792ed3', '631a30a7f6f2c1d59ea35419197b70da');
-            twilio.listSms({
-                from:'+17199634882'
-            }, function (err, responseData) {
-                responseData.smsMessages.forEach(function(message) {
-                    console.log('Message sent on: '+message.dateCreated.toLocaleDateString());
-                    console.log(message.body);
-                });
-            });
-        },
-        printRequest: function(request) {
-            Commitments.insert({
-                commitmentName: request,
-                createdAt: new Date(),
-                owner: Meteor.userId(),
-                username: Meteor.user().username
-            });
-        }
     });
 
 
@@ -257,18 +232,25 @@ if (Meteor.isServer) {
 }
 
 
-/* Routes */
+/* Home route */
 Router.route('/', function () {
     this.render('home');
 });
 
+/* On POST from Twilio */
 Router.route('/text/', function(){
     this.response.statusCode = 200;
     this.response.setHeader("Content-Type", "text/plain");
 
-    if (this.request.method == 'POST') {
-        this.response.end(JSON.stringify(this.request.body.Body));
-    }
+    var body = this.request.body.Body;
+    body = body.toLowerCase();
+    split = body.split(":");
+    commitment = split[0];
+    task = split[1];
+    reply = "Commitment: " + commitment + ", Task: " + task;
+
+
+    this.response.end(JSON.stringify(reply));
 }, {where: 'server'});
 
 
