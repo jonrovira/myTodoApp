@@ -215,7 +215,7 @@ if (Meteor.isServer) {
             twilio.sendSms({
                 to:'+17199634882', 
                 from: '+17194530451', 
-                body: 'word to your mother.'
+                body: 'Response from your site!'
             }, function(err, responseData) { //this function is executed when a response is received from Twilio
                 if (!err) { // "err" is an error received during the request, if any
                   // "responseData" is a JavaScript object containing data received from Twilio.
@@ -239,6 +239,14 @@ if (Meteor.isServer) {
                     console.log(message.body);
                 });
             });
+        },
+        printRequest: function(request) {
+            Commitments.insert({
+                commitmentName: request,
+                createdAt: new Date(),
+                owner: Meteor.userId(),
+                username: Meteor.user().username
+            });
         }
     });
 
@@ -256,17 +264,10 @@ Router.route('/', function () {
 
 Router.route('/text/', function(){
     this.response.statusCode = 200;
-    this.response.setHeader("Content-Type", "application/json");
-    this.response.setHeader("Access-Control-Allow-Origin", "*");
-    this.response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    this.response.setHeader("Content-Type", "text/plain");
 
-    if (this.request.method == 'GET') {
-        Meteor.call("sendSMS");
-        this.response.end(JSON.stringify("success!"));
-    }
-    else if (this.request.method == 'POST') {
-        Meteor.call("sendSMS");
-        this.response.end(JSON.stringify("success!"));
+    if (this.request.method == 'POST') {
+        this.response.end(JSON.stringify(this.request.body.Body));
     }
 }, {where: 'server'});
 
