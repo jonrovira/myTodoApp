@@ -39,10 +39,11 @@ if (Meteor.isClient) {
         "submit form": function(event) {
 
             // Get new commitment string
-            var text = event.target.commitment.value;
+            var original = event.target.commitment.value;
+            normalized = original.toLowerCase();
 
             // Add commitment to commitments collection
-            Meteor.call("addCommitment", text);
+            Meteor.call("addCommitment", original, normalized);
 
             // Cleanup: clear input, void default submit
             event.target.commitment.value = "";
@@ -125,9 +126,10 @@ if (Meteor.isServer) {
 
     /* Methods */
     Meteor.methods({
-        addCommitment: function (name) {
+        addCommitment: function (original, normalized) {
             Commitments.insert({
-                commitmentName: name,
+                commitmentName: original,
+                normalizedName: normalized,
                 createdAt: new Date()
             });
         },
@@ -172,7 +174,7 @@ if (Meteor.isServer) {
                     console.log(err);
                 }
             });
-        },
+        }
     });
 
 
@@ -190,17 +192,24 @@ Router.route('/', function () {
 /* On POST from Twilio */
 Router.route('/text/', function(){
     this.response.statusCode = 200;
-    this.response.setHeader("Content-Type", "text/plain");
+    this.response.setHeader("Content-Type", "text/xml");
 
-    var body = this.request.body.Body;
-    body = body.toLowerCase();
-    split = body.split(":");
-    commitment = split[0];
-    task = split[1];
-    reply = "Commitment: " + commitment + ", Task: " + task;
+    // parse text
+    var body  = this.request.body.Body;
+    var split = body.split(":");
+    var commitment = split[0];
+    var task       = split[1];
 
+    // search for commitment
+    var commitmentId = Commitments.findOne({normalizedName: commitment.toLowerCase()})._id;
 
-    this.response.end(JSON.stringify(reply));
+    // add task
+    Meteor.call("addTask", task, commitmentId)
+
+    // respond to text
+    // var reply = "<h1>New task has successfully been added!</h1><ul><li>Commitment: " + commitment + "</li><li>Task: " + task + "</li></ul>";
+    var reply = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message><Body>|&#13;&#13;New task has successfully been added!&#13;     Commitment: ' + commitment + '&#13;     Task: ' + task + '</Body></Message></Response>'
+    this.response.end(reply);
 }, {where: 'server'});
 
 
