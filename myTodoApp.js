@@ -1,5 +1,28 @@
+/*
+    Sources: 
+      • http://blog.benmcmahen.com/post/41741539120/building-a-customized-accounts-ui-for-meteor
+      • http://docs.meteor.com/#/full/
+      • 
+*/
+
+
 Commitments = new Mongo.Collection("commitments");
 Tasks       = new Mongo.Collection("tasks");
+
+/* helper functions */
+var trimInput = function(val) {
+
+    return val.replace(/^\s*|\s*$/g, "");
+}
+var isValidPassword = function(val, field) {
+    if (val.length >= 6) {
+        return true;
+    }
+    else {
+        Session.set('displayMessage', 'Error &amp; Too short.');
+        return false;
+    }
+}
 
 
 if (Meteor.isClient) {
@@ -7,7 +30,75 @@ if (Meteor.isClient) {
     Meteor.subscribe("commitments");
     Meteor.subscribe("tasks");
 
-    /* body */
+    /* Reactive context for ui messages */
+    Meteor.autorun(function() {
+        //whenever session variable changes, run this
+        var message = Session.get('displayMessage');
+        if (message) {
+            var stringArray = message.split('&amp;');
+            console.log(stringArray);
+
+            Session.set('displayMessage', null);
+        }
+    });
+
+    /* login */
+    Template.login.events({
+        "submit #login-form" : function(e, t) {
+            e.preventDefault();
+            //get form info
+            var email    = t.find('#login-email').value,
+                password = t.find('#login-password').value;
+
+            //validate info
+            email = trimInput(email);
+
+            //login with info (should validate)
+            Meteor.loginWithPassword(email, password, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    window.location.href = "/home/";
+                }
+            });
+            return false; //avoid default form submit
+        }
+    });
+
+    /* register */
+    Template.register.events({
+        "submit #register-form": function(e, t) {
+            e.preventDefault();
+            //get form info
+            var email    = t.find('#account-email').value,
+                password = t.find('#account-password').value;
+
+            //validate info
+            email = trimInput(email);
+            if (isValidPassword(password)) {
+
+                //create user account with info (should validate)
+                Accounts.createUser({email: email, password: password}, function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        window.location.href = "/home/";
+                    }
+                });
+            }
+
+            return false; //avoid default form submit
+        }
+    });
+
+    /* home */
+    Template.home.events({
+        "click #logout": function() {
+            Meteor.logout();
+        }
+    });
     Template.home.helpers({
         commitments: function() {
             if (Session.get("hideCompleted")) {
@@ -103,11 +194,6 @@ if (Meteor.isClient) {
             Meteor.call("listSMS");
         }
     });
-
-    /* Meteor Accounts */
-    Accounts.ui.config({
-        passwordSignupFields: "USERNAME_ONLY"
-    });
 }
 
 
@@ -184,9 +270,29 @@ if (Meteor.isServer) {
 }
 
 
+/* Login route */
+Router.route('/', function() {
+    if (Meteor.userId()) {
+        this.render('home');
+    }
+    else {
+        this.render('login');
+    }
+});
+
+/* Register route */
+Router.route('/register/', function() {
+    this.render('register');
+});
+
 /* Home route */
-Router.route('/', function () {
-    this.render('home');
+Router.route('/home/', function() {
+    if (Meteor.userId()) {
+        this.render('home');
+    }
+    else {
+        this.redirect('/');
+    }
 });
 
 /* On POST from Twilio */
@@ -207,8 +313,7 @@ Router.route('/text/', function(){
     Meteor.call("addTask", task, commitmentId)
 
     // respond to text
-    // var reply = "<h1>New task has successfully been added!</h1><ul><li>Commitment: " + commitment + "</li><li>Task: " + task + "</li></ul>";
-    var reply = '<?xml version="1.0" encoding="UTF-8" ?><Response><Message><Body>|&#13;&#13;New task has successfully been added!&#13;     Commitment: ' + commitment + '&#13;     Task: ' + task + '</Body></Message></Response>'
+    var reply = '<?xml version="1.0" encoding="UTF-8" ?>\<Response><Message><Body>|&#13;&#13;New task has successfully been added!&#13;     Commitment: ' + commitment + '&#13;     Task: ' + task + '</Body></Message></Response>'
     this.response.end(reply);
 }, {where: 'server'});
 

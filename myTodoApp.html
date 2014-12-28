@@ -5,12 +5,36 @@
 <body></body>
 
 
+<!-- Login route -->
+<template name="login">
+	<h1>Log In</h1>
+	<form id="login-form" action="action">
+		<div>
+			<input type="email" id="login-email" placeholder="email" />
+			<input type="password" id="login-password" placeholder="password" />
+			<input type="submit" id="login-button" value="Sign in" />
+		</div>
+	</form>
+</template>
+
+<!-- Registration route -->
+<template name="register">
+	<h1>Register</h1>
+	<form id="register-form" action="action">
+		<div>
+			<input type="email" id="account-email" placeholder="email" />
+			<input type="password" id="account-password" placeholder="password" />
+			<input type="submit" id="create-account" value="Create an account" />
+		</div>
+	</form>
+</template>
+
 <!-- Home route -->
 <template name="home">
 	<h1>Jon Rovira's Todo List ({{incompleteCount}})</h1>
+	<button id="logout">Log out</button>
 	{{> addCommitment}}
 	{{> hideCompleted}}
-	{{> loginButtons}}
 
 	<ul>
 		{{#each commitments}}
