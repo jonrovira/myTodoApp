@@ -2,7 +2,10 @@
     Sources: 
       • http://blog.benmcmahen.com/post/41741539120/building-a-customized-accounts-ui-for-meteor
       • http://docs.meteor.com/#/full/
-      • 
+      • https://color.adobe.com/White-Deep-Lake-color-theme-3097675/edit/?copy=true&base=2&rule=Custom&selected=0&name=Copy%20of%20White%20Deep%20Lake&mode=rgb&rgbvalues=0.0196078,0.407843,0.454902,0,0.529412,0.537255,0.94902,0.352941,0.345098,0.843137,0.458824,0.447059,0.945098,0.941176,0.956863&swatchOrder=0,1,2,3,4
+
+    To add:
+      • http://codyhouse.co/gem/3d-rotating-navigation/
 */
 
 
@@ -41,6 +44,13 @@ if (Meteor.isClient) {
             Session.set('displayMessage', null);
         }
     });
+
+    Template.layout.rendered = function() {
+        $('div.background-image').width($(window).width());
+        $('div.background-image').height($(window).height());
+        $('div.wrapper').width($(window).width());
+        $('div.wrapper').height($(window).height());
+    }
 
     /* login */
     Template.login.events({
@@ -184,16 +194,6 @@ if (Meteor.isClient) {
             Meteor.call("deleteTask", this._id);
         }
     });
-
-    /* twilio playground */
-    Template.twilioPlayground.events({
-        "click button.send": function () {
-            Meteor.call("sendSMS");
-        },
-        "click button.list": function () {
-            Meteor.call("listSMS");
-        }
-    });
 }
 
 
@@ -269,6 +269,11 @@ if (Meteor.isServer) {
     });
 }
 
+
+/* Template layout */
+Router.configure({
+    layoutTemplate: 'layout'
+});
 
 /* Login route */
 Router.route('/', function() {

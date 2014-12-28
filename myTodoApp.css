@@ -1,8 +1,0 @@
-/* CSS declarations go here */
-body > ul > li {
-	margin-top: 20px;
-}
-
-body > ul > li > form input {
-	outline: none;
-}

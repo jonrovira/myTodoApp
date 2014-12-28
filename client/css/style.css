@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "dense-regular";
+  src: url("../fonts/Dense-Regular.otf"); }
+html, body, div, span, h1, h2, h3, h4,
+h5, h6, p, a, img, i, ol, ul, li, form,
+label, table, caption {
+  margin: 0;
+  padding: 0; }
+
+div.background-image {
+  position: fixed;
+  background-image: url("/img/jr-background-3.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 500px 500px;
+  background-position: center;
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+  z-index: 1; }
+
+div.wrapper {
+  position: fixed;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.5); }
+
+section#login {
+  padding-top: 200px;
+  text-align: center; }
+  section#login form {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 30px 0 40px 0;
+    width: 310px;
+    background-color: rgba(246, 246, 246, 0.8); }
+    section#login form h1 {
+      margin-bottom: 20px;
+      font-family: "dense-regular";
+      font-size: 55px;
+      word-spacing: 3px;
+      color: #333; }
+    section#login form div {
+      margin-right: auto;
+      margin-bottom: 10px;
+      margin-left: auto;
+      padding: 5px;
+      width: 243px;
+      background-color: #fbfbfb;
+      border: 1px solid #eee; }
+      section#login form div i {
+        display: inline-block;
+        padding: 6px;
+        width: 20px;
+        color: #aaa;
+        border-right: 1px solid #eee; }
+      section#login form div input {
+        display: inline-block;
+        width: 200px;
+        font-size: 15px;
+        color: #666;
+        background-color: #fbfbfb;
+        border: none;
+        outline: none; }
+    section#login form > input {
+      padding-top: 4px;
+      width: 257px;
+      height: 40px;
+      font-family: "dense-regular";
+      font-size: 25px;
+      word-spacing: 1px;
+      color: #fff;
+      background-color: #056874;
+      border: none;
+      cursor: pointer; }
+
+/*# sourceMappingURL=style.css.map */
