@@ -16,34 +16,40 @@ label, table, caption {
   font-family: "Roboto-Light", "Helvetica", sans-serif; }
 
 /* Skeleton */
-html {
-  width: 100%; }
-  html body {
-    width: 100%; }
-    html body div.background-image {
-      position: fixed;
-      width: 100%;
-      background-image: url("/img/jr-background.png");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: 500px 500px;
-      background-position: center;
-      z-index: 1; }
-    html body div.background-gradient {
-      position: fixed;
-      width: 100%;
-      background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-      background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-      background: -o-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-      background: -moz-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-      background: linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-      z-index: 2; }
-    html body div.wrapper {
-      position: fixed;
-      margin-right: auto;
-      margin-left: auto;
-      width: 1250px;
-      z-index: 3; }
+html body div.wrapper {
+  position: fixed;
+  width: 100%;
+  z-index: 2; }
+  html body div.wrapper main.content {
+    margin-right: auto;
+    margin-left: auto;
+    width: 90%;
+    max-width: 1250px; }
+html body div.background-effects {
+  position: fixed;
+  width: 100%;
+  background: -webkit-linear-gradient(#32574c, #d9ba8c, #5d4157);
+  background: -o-linear-gradient(#32574c, #d9ba8c, #5d4157);
+  background: -moz-linear-gradient(#32574c, #d9ba8c, #5d4157);
+  background: linear-gradient(#32574c, #d9ba8c, #5d4157);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+  -webkit-filter: contrast(1.2);
+  -moz-filter: contrast(1.2);
+  -o-filter: contrast(1.2);
+  -ms-filter: contrast(1.2);
+  filter: contrast(1.2);
+  -webkit-filter: grayscale(0.1);
+  -moz-filter: grayscale(0.1);
+  -o-filter: grayscale(0.1);
+  -ms-filter: grayscale(0.1);
+  filter: grayscale(0.1);
+  z-index: 1; }
 
 /* Login */
 section#login {
@@ -95,58 +101,115 @@ section#login {
       border: none;
       cursor: pointer; }
 
-section#right-pane {
-  float: right; }
-  section#right-pane div.pane {
-    width: 210px;
-    background-color: #fcfcfc; }
-    section#right-pane div.pane div.pane-item {
-      padding: 20px;
-      border-bottom: 1px solid #dfdfdf; }
-    section#right-pane div.pane div.pane-content {
-      background-color: #efefef; }
-    section#right-pane div.pane div.pane-content.pane-header {
-      color: #969696; }
-      section#right-pane div.pane div.pane-content.pane-header img {
+/* Dashboard */
+section#dashboard {
+  margin-top: 40px;
+  overflow: auto; }
+  section#dashboard section#dashboard-header {
+    float: left; }
+  section#dashboard section#dashboard-main {
+    float: left; }
+  section#dashboard section#dashboard-pane {
+    float: right; }
+
+/* Dashboard Header */
+section#dashboard-header {
+  width: calc(100% - 210px);
+  background-color: rgba(0, 0, 0, 0.4); }
+  section#dashboard-header header {
+    padding: 20px 30px;
+    overflow: auto; }
+    section#dashboard-header header h1 {
+      float: left;
+      font-weight: normal;
+      color: #fff; }
+    section#dashboard-header header ul {
+      float: right; }
+      section#dashboard-header header ul li {
         display: inline-block;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%; }
-      section#right-pane div.pane div.pane-content.pane-header i {
-        float: right;
-        margin-left: 10px;
-        vertical-align: top;
-        font-size: 30px; }
-      section#right-pane div.pane div.pane-content.pane-header h2 {
-        margin-top: 20px;
-        font-weight: normal;
-        font-size: 18px; }
-    section#right-pane div.pane div.pane-content.pane-commitments ul {
-      list-style: none; }
-      section#right-pane div.pane div.pane-content.pane-commitments ul li {
-        margin-bottom: 27px;
+        margin-left: 20px;
         cursor: pointer; }
-        section#right-pane div.pane div.pane-content.pane-commitments ul li i {
-          margin-right: 24px;
-          vertical-align: middle;
-          font-size: 13px;
-          color: #56ddbf; }
-        section#right-pane div.pane div.pane-content.pane-commitments ul li span {
-          text-transform: uppercase;
-          font-size: 15px;
-          color: #969696; }
-      section#right-pane div.pane div.pane-content.pane-commitments ul li:hover span {
-        color: #bbb; }
-    section#right-pane div.pane div.pane-section-header {
-      color: #666;
-      background-color: #fcfcfc; }
-      section#right-pane div.pane div.pane-section-header i {
-        display: inline-block;
-        margin-right: 14px;
-        font-size: 15px; }
-      section#right-pane div.pane div.pane-section-header h3 {
-        display: inline-block;
-        font-weight: normal;
-        font-size: 15px; }
+        section#dashboard-header header ul li i {
+          font-size: 30px;
+          color: #777; }
+        section#dashboard-header header ul li nav i {
+          color: #fff; }
+
+/* Dashboard Left Main */
+section#dashboard-main {
+  padding: 0 25px;
+  width: calc(100% - 210px - 50px);
+  background-color: rgba(0, 0, 0, 0.5); }
+  section#dashboard-main div.dashboard-main > ul {
+    list-style: none; }
+    section#dashboard-main div.dashboard-main > ul > li {
+      margin-bottom: 20px; }
+
+li.dashboard-commitment div.dashboard-commitment-left div.dashboard-commitment-top {
+  padding: 20px 10px;
+  background-color: rgba(85, 98, 110, 0.8); }
+  li.dashboard-commitment div.dashboard-commitment-left div.dashboard-commitment-top i {
+    float: left;
+    margin-right: 15px;
+    vertical-align: middle;
+    font-size: 9px;
+    color: #56ddbf; }
+  li.dashboard-commitment div.dashboard-commitment-left div.dashboard-commitment-top h4 {
+    float: left;
+    font-weight: normal;
+    color: #ccc; }
+
+/* Dashboard Right Pane */
+section#dashboard-pane div.pane {
+  width: 210px;
+  background-color: #fcfcfc; }
+  section#dashboard-pane div.pane div.pane-item {
+    padding: 20px;
+    border-bottom: 1px solid #dfdfdf; }
+  section#dashboard-pane div.pane div.pane-content {
+    background-color: #efefef; }
+  section#dashboard-pane div.pane div.pane-content.pane-header {
+    color: #969696; }
+    section#dashboard-pane div.pane div.pane-content.pane-header img {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; }
+    section#dashboard-pane div.pane div.pane-content.pane-header i {
+      float: right;
+      margin-left: 10px;
+      vertical-align: top;
+      font-size: 30px; }
+    section#dashboard-pane div.pane div.pane-content.pane-header h2 {
+      margin-top: 20px;
+      font-weight: normal;
+      font-size: 18px; }
+  section#dashboard-pane div.pane div.pane-content.pane-commitments ul {
+    list-style: none; }
+    section#dashboard-pane div.pane div.pane-content.pane-commitments ul li {
+      margin-bottom: 27px;
+      cursor: pointer; }
+      section#dashboard-pane div.pane div.pane-content.pane-commitments ul li i {
+        margin-right: 24px;
+        vertical-align: middle;
+        font-size: 13px;
+        color: #56ddbf; }
+      section#dashboard-pane div.pane div.pane-content.pane-commitments ul li span {
+        text-transform: uppercase;
+        font-size: 15px;
+        color: #969696; }
+    section#dashboard-pane div.pane div.pane-content.pane-commitments ul li:hover span {
+      color: #bbb; }
+  section#dashboard-pane div.pane div.pane-section-header {
+    color: #666;
+    background-color: #fcfcfc; }
+    section#dashboard-pane div.pane div.pane-section-header i {
+      display: inline-block;
+      margin-right: 14px;
+      font-size: 15px; }
+    section#dashboard-pane div.pane div.pane-section-header h3 {
+      display: inline-block;
+      font-weight: normal;
+      font-size: 15px; }
 
 /*# sourceMappingURL=style.css.map */

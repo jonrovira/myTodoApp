@@ -34,12 +34,6 @@ Meteor.methods({
         Tasks.remove(taskId);
     },
 
-    /* Set an item in commitments collection to "checked" */
-    setCommitmentChecked: function (commitmentId, setChecked) {
-        var commitment = Commitments.findOne(commitmentId);
-        Commitments.update(commitmentId, {$set: {checked: setChecked} });
-    },
-
     /* Set an item in tasks collcetion to "checked" */
     setTaskChecked: function (taskId, setChecked) {
         var task = Tasks.findOne(taskId);

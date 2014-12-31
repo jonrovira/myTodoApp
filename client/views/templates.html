@@ -4,10 +4,11 @@
 
 <!-- Layout (iron router) -->
 <template name="layout">
-	<div class="background-image"></div>
-	<div class="background-gradient"></div>
+	<div class="background-effects"></div>
 	<div class="wrapper">
-		{{> yield}}
+		<main class="content">
+			{{> yield}}
+		</main>
 	</div>
 </template>
 
@@ -46,7 +47,6 @@
 	<h1>Jon Rovira's Todo List ({{incompleteCount}})</h1>
 	<button id="logout">Log out</button>
 	{{> addCommitment}}
-	{{> hideCompleted}}
 
 	<ul>
 		{{#each commitments}}
@@ -57,13 +57,46 @@
 
 <!-- Dashboard route-->
 <template name="dashboard">
-
-	{{> rightPane}}
+	<section id="dashboard">
+		{{> dashboardHeader}}
+		{{> dashboardPane}}
+		{{> dashboardMain}}
+	</section>
 </template>
 
-<!-- Dashboard left pane -->
-<template name="rightPane">
-	<section id="right-pane">
+<!-- Dashboard header -->
+<template name="dashboardHeader">
+	<section id="dashboard-header">
+		<header>
+			<h1>Hey, Jon!</h1>
+			<ul>
+				<li><i class="fa fa-search"></i></li>
+				<li>
+					<nav>
+						<i class="fa fa-bars"></i>
+					</nav>
+				</li>
+			</ul>
+		</header>
+	</section>
+</template>
+
+<!-- Dashboard left main -->
+<template name="dashboardMain">
+	<section id="dashboard-main">
+		<div class="dashboard-main">
+			<ul>
+				{{#each commitments}}
+					{{> commitment}}
+				{{/each}}
+			</ul>
+		</div>
+	</section>
+</template>
+
+<!-- Dashboard right pane -->
+<template name="dashboardPane">
+	<section id="dashboard-pane">
 		<div class="pane">
 			<div class="pane-item pane-content pane-header">
 				<img src="/img/user.jpg" />
@@ -86,14 +119,6 @@
 	</section>
 </template>
 
-<!-- Hide completed option -->
-<template name="hideCompleted">
-	<label>
-	  	<input type="checkbox" checked="{{hideCompleted}}" />
-	  	Hide Completed Commitments
-	</label>
-</template>
-
 <!-- Add commitment form -->
 <template name="addCommitment">
 	<form>
@@ -110,16 +135,23 @@
 
 <!-- Commitment item -->
 <template name="commitment">
-	<li id="{{commitmentName}}" class="{{#if checked}}checked{{/if}}">
-		<button class="commitment-delete">&times;</button>
-		<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" />
-		<span class="commitment">{{commitmentName}}</span>
-		{{> addTask}}
-		<ul>
-			{{#each tasks}}
-				{{> task}}
-			{{/each}}
-		</ul>
+	<li id="{{commitmentName}}" class="dashboard-commitment">
+		<div class="dashboard-commitment-left">
+			<div class="dashboard-commitment-top">
+				<i class="fa fa-circle"></i>
+				<h4>{{commitmentName}}</h4>
+				<button class="commitment-delete">&times;</button>
+			</div>
+			{{> addTask}}
+			<ul>
+				{{#each tasks}}
+					{{> task}}
+				{{/each}}
+			</ul>
+		</div>
+		<div class="dashboard-commitment-right">
+			<h4>Progress</h4>
+		</div>
 	</li>
 </template>
 

@@ -5,34 +5,24 @@
 /* home */
 Template.home.helpers({
     commitments: function() {
-        if (Session.get("hideCompleted")) {
-            return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
-        }
-        else {
-            return Commitments.find({}, {sort: {createdAt: -1}});
-        }
+        return Commitments.find({}, {sort: {createdAt: -1}});
     },
     incompleteCount: function () {
         return Tasks.find({checked: {$ne: true}}).count();
     }
 });
 
-/* rightPane */
-Template.rightPane.helpers({
+/* dashboardMain */
+Template.dashboardMain.helpers({
     commitments: function() {
-        if (Session.get("hideCompleted")) {
-            return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
-        }
-        else {
-            return Commitments.find({}, {sort: {createdAt: -1}});
-        }
+        return Commitments.find({}, {sort: {createdAt: -1}});
     }
 });
 
-/* hideCompleted */
-Template.hideCompleted.helpers({
-    hideCompleted: function() {
-        return Session.get("hideCompleted");
+/* dashboardPane */
+Template.dashboardPane.helpers({
+    commitments: function() {
+        return Commitments.find({}, {sort: {createdAt: -1}});
     }
 });
 

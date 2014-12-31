@@ -25,37 +25,46 @@ label, table, caption, {
 
 /* Skeleton */
 html {
-	width: 100%;
 
 	body {
-		width: 100%;
 
-		div.background-image {
-			position: fixed;
-			width: 100%;
-			background-image: url('/img/jr-background.png');
-		    background-repeat: no-repeat;
-		    background-attachment: fixed;
-		    background-size: 500px 500px;
-		    background-position: center;
-			z-index: 1;
-		}
-		div.background-gradient {
-			position: fixed;
-			width: 100%;
-			background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-			background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-			background: -o-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-			background: -moz-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-			background: linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-			z-index: 2;
-		}
 		div.wrapper {
 			position: fixed;
-			margin-right: auto;
-			margin-left: auto;
-			width: 1250px;
-			z-index: 3;
+			width: 100%;
+			z-index: 2;
+
+			main.content {
+				margin-right: auto;
+				margin-left: auto;
+				width: 90%;
+				max-width: 1250px;
+			}
+		}
+		div.background-effects {
+			position: fixed;
+			width: 100%;
+			background: -webkit-linear-gradient(rgb(50, 87, 76), rgb(217, 186, 140), rgb(93, 65, 87));
+			background: -o-linear-gradient(rgb(50, 87, 76), rgb(217, 186, 140), rgb(93, 65, 87));
+			background: -moz-linear-gradient(rgb(50, 87, 76), rgb(217, 186, 140), rgb(93, 65, 87));
+			background: linear-gradient(rgb(50, 87, 76), rgb(217, 186, 140), rgb(93, 65, 87));
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			-webkit-filter: blur(2px);
+			-moz-filter: blur(2px);
+			-o-filter: blur(2px);
+			-ms-filter: blur(2px);
+			filter: blur(2px);
+			-webkit-filter: contrast(1.2);
+			-moz-filter: contrast(1.2);
+			-o-filter: contrast(1.2);
+			-ms-filter: contrast(1.2);
+			filter: contrast(1.2);
+			-webkit-filter: grayscale(0.1);
+			-moz-filter: grayscale(0.1);
+			-o-filter: grayscale(0.1);
+			-ms-filter: grayscale(0.1);
+			filter: grayscale(0.1);
+			z-index: 1;
 		}
 	}
 }
@@ -122,8 +131,112 @@ section#login {
 	}
 }
 
-section#right-pane {
-	float: right;
+
+
+/* Dashboard */
+section#dashboard {
+	margin-top: 40px;
+	overflow: auto;
+
+	section#dashboard-header {
+		float: left;
+	}
+	section#dashboard-main {
+		float: left;
+	}
+	section#dashboard-pane {
+		float: right;
+	}
+}
+
+
+
+/* Dashboard Header */
+section#dashboard-header {
+	width: calc(100% - 210px);
+	background-color: rgba(0, 0, 0, 0.4);
+
+	header {
+		padding: 20px 30px;
+		overflow: auto;
+
+		h1 {
+			float: left;
+			font-weight: normal;
+			color: #fff;
+		}
+		ul {
+			float: right;
+
+			li {
+				display: inline-block;
+				margin-left: 20px;
+				cursor: pointer;
+
+				i {
+					font-size: 30px;
+					color: #777;
+				}
+				nav {
+
+					i {
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+/* Dashboard Left Main */
+section#dashboard-main {
+	padding: 0 25px;
+	width: calc(100% - 210px - 50px);
+	background-color: rgba(0, 0, 0, 0.5);
+
+	div.dashboard-main {
+
+		> ul {
+			list-style: none;
+
+			> li {
+				margin-bottom: 20px;
+			}
+		}
+	}
+}
+
+
+ 
+li.dashboard-commitment {
+
+	div.dashboard-commitment-left {
+
+		div.dashboard-commitment-top {
+			padding: 20px 10px;
+			background-color: rgba(85, 98, 110, 0.8);
+
+			i {
+				float: left;
+				margin-right: 15px;
+				vertical-align: middle;
+				font-size: 9px;
+				color: #56ddbf;
+			}
+			h4 {
+				float: left;
+				font-weight: normal;
+				color: #ccc;
+			}
+		}
+	}
+}
+
+
+/* Dashboard Right Pane */
+section#dashboard-pane {
 
 	div.pane {
 		width: 210px;
@@ -203,3 +316,5 @@ section#right-pane {
 		}
 	}
 }
+
+

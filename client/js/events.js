@@ -93,13 +93,6 @@ Template.home.events({
     }
 });
 
-/* hideCompleted */
-Template.hideCompleted.events({
-    "change input": function (event) {
-        Session.set("hideCompleted", event.target.checked);
-    }
-});
-
 /* addCommitment */
 Template.addCommitment.events({
     "submit form": function(event) {
