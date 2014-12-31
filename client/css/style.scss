@@ -1,12 +1,7 @@
+/* Fonts */
 @font-face {
 	font-family: "Dense-Regular";
 	src: url('../fonts/Dense-Regular/Dense-Regular.otf');
-}
-@font-face {
-	font-family: "Roboto-Thin";
-	src: url('../fonts/Roboto/Roboto-Thin.ttf');
-	font-weight: lighter;
-	font-style: normal;
 }
 @font-face {
    font-family: "Roboto-Light";
@@ -14,25 +9,10 @@
    font-weight: normal;
    font-style: normal;
 }
-@font-face {
-	font-family: "Roboto-Condensed-Light";
-	src: url('../fonts/Roboto/RobotoCondensed-Light.ttf');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Roboto-Italic";
-	src: url('../fonts/Roboto/Roboto-Italic.ttf');
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Roboto-Medium";
-	src: url('../fonts/Roboto/Roboto-Medium.ttf');
-	font-weight: normal;
-	font-style: normal;
-}
 
+
+
+/* Default globals */
 html, body, div, span, h1, h2, h3, h4,
 h5, h6, p, a, img, i, ol, ul, li, form,
 label, table, caption, {
@@ -41,28 +21,48 @@ label, table, caption, {
 	font-family: "Roboto-Light", "Helvetica", sans-serif;
 }
 
-div.background-image {
-	position: fixed;
-	background-image: url('/img/jr-background.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 500px 500px;
-    background-position: center;
-	z-index: 1;
-}
-div.wrapper {
-	position: fixed;
-	margin-right: auto;
-	margin-left: auto;
+
+
+/* Skeleton */
+html {
 	width: 100%;
-	z-index: 9999;
-	background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-	background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-	background: -o-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-	background: -moz-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
-	background: linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+
+	body {
+		width: 100%;
+
+		div.background-image {
+			position: fixed;
+			width: 100%;
+			background-image: url('/img/jr-background.png');
+		    background-repeat: no-repeat;
+		    background-attachment: fixed;
+		    background-size: 500px 500px;
+		    background-position: center;
+			z-index: 1;
+		}
+		div.background-gradient {
+			position: fixed;
+			width: 100%;
+			background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+			background: -webkit-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+			background: -o-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+			background: -moz-linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+			background: linear-gradient(rgba(215, 221, 232, 0.8), rgba(117, 127, 154, 0.5));
+			z-index: 2;
+		}
+		div.wrapper {
+			position: fixed;
+			margin-right: auto;
+			margin-left: auto;
+			width: 1250px;
+			z-index: 3;
+		}
+	}
 }
 
+
+
+/* Login */
 section#login {
 	padding-top: 200px;
 	text-align: center;
