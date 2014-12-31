@@ -45,11 +45,14 @@ if (Meteor.isClient) {
         }
     });
 
+    // Dynamic styling
     Template.layout.rendered = function() {
         $('div.background-image').width($(window).width());
-        $('div.background-image').height($(window).height());
         $('div.wrapper').width($(window).width());
+
+        $('div.background-image').height($(window).height());
         $('div.wrapper').height($(window).height());
+        $('div.pane').height($(window).height());
     }
 
     /* login */
@@ -69,7 +72,7 @@ if (Meteor.isClient) {
                     console.log(err);
                 }
                 else {
-                    window.location.href = "/home/";
+                    window.location.href = "/dashboard/";
                 }
             });
             return false; //avoid default form submit
@@ -94,7 +97,7 @@ if (Meteor.isClient) {
                         console.log(err);
                     }
                     else {
-                        window.location.href = "/home/";
+                        window.location.href = "/dashboard/";
                     }
                 });
             }
@@ -120,6 +123,17 @@ if (Meteor.isClient) {
         },
         incompleteCount: function () {
             return Tasks.find({checked: {$ne: true}}).count();
+        }
+    });
+
+    Template.rightPane.helpers({
+        commitments: function() {
+            if (Session.get("hideCompleted")) {
+                return Commitments.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+            }
+            else {
+                return Commitments.find({}, {sort: {createdAt: -1}});
+            }
         }
     });
 
@@ -278,7 +292,7 @@ Router.configure({
 /* Login route */
 Router.route('/', function() {
     if (Meteor.userId()) {
-        this.render('home');
+        this.render('dashboard');
     }
     else {
         this.render('login');
@@ -291,9 +305,9 @@ Router.route('/register/', function() {
 });
 
 /* Home route */
-Router.route('/home/', function() {
+Router.route('/dashboard/', function() {
     if (Meteor.userId()) {
-        this.render('home');
+        this.render('dashboard');
     }
     else {
         this.redirect('/');
