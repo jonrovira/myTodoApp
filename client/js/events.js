@@ -93,6 +93,13 @@ Template.home.events({
     }
 });
 
+/* dashboardPane */
+Template.dashboardPane.events({
+    "click #logout": function() {
+        Meteor.logout();
+    }
+});
+
 /* addCommitment */
 Template.addCommitment.events({
     "submit form": function(event) {

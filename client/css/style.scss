@@ -81,7 +81,7 @@ section#login {
 		margin-left: auto;
 		padding: 30px 0 40px 0;
 		width: 310px;
-		background-color: rgba(246, 246, 246, 0.8);
+		background-color: #efefef;
 
 		h1 {
 			margin-bottom: 20px;
@@ -175,7 +175,7 @@ section#dashboard-header {
 
 				i {
 					font-size: 30px;
-					color: #777;
+					color: rgba(130, 130, 130, 0.5);
 				}
 				nav {
 
@@ -192,9 +192,10 @@ section#dashboard-header {
 
 /* Dashboard Left Main */
 section#dashboard-main {
-	padding: 0 25px;
-	width: calc(100% - 210px - 50px);
+	padding: 0 50px;
+	width: calc(100% - 210px - 100px);
 	background-color: rgba(0, 0, 0, 0.5);
+	overflow-y: scroll;
 
 	div.dashboard-main {
 
@@ -209,30 +210,147 @@ section#dashboard-main {
 }
 
 
- 
-li.dashboard-commitment {
+/* Commitment */
+li.commitment {
+	width: 100%;
+	overflow: auto;
 
-	div.dashboard-commitment-left {
+	div.commitment-header {
+		padding: 20px;
+		background-color: rgba(125, 124, 129, 0.8);
+		overflow: auto;
 
-		div.dashboard-commitment-top {
-			padding: 20px 10px;
-			background-color: rgba(85, 98, 110, 0.8);
+		div.left {
+			float: left;
 
 			i {
-				float: left;
+				display: inline-block;
 				margin-right: 15px;
 				vertical-align: middle;
-				font-size: 9px;
-				color: #56ddbf;
+				font-size: 9px;	
+				color: #60d3d3;
 			}
 			h4 {
-				float: left;
+				display: inline-block;
 				font-weight: normal;
+				font-size: 16px;
 				color: #ccc;
+			}
+		}
+		div.right {
+			float: right;
+
+			i {
+				color: rgba(48, 56, 64, 0.8);
+			}
+		}
+	}
+	div.tasks {
+		float: left;
+		width: calc(100% - 201px);
+		border-right: 1px solid #444;
+		font-size: 0;
+
+		div.commitment-header {
+
+			div.left {
+
+				i {
+					color: #60d3d3;
+				}
+			}
+		}
+		div.slide-button {
+			display: inline-block;
+			vertical-align: top;
+			width: 30px;
+			height: 170px;
+			background-color: rgba(125, 124, 129, 0.8);
+			border-top: 1px solid #444;
+			cursor: pointer;
+
+			i {
+				padding: 65px 9px;
+				font-size: 30px;
+				color: #555;
+			}
+		}
+		div.move-left { border-right: 1px solid #444; }
+		div.move-right { border-left: 1px solid #444; }
+		div.task-list-wrapper {
+			display: inline-block;
+			width: calc(100% - 62px);
+			overflow-x: hidden;
+
+			ul.task-list {
+				white-space: nowrap;
+				font-size: 0;
+				list-style: none;
+				border-top: 1px solid #444;
+			}
+		}
+	}
+	div.progress {
+		float: right;
+		width: 200px;
+
+		div.commitment-header {
+
+			div.left {
+
+				i {
+					color: #88db61;
+				}
+			}
+		}
+		div.percentage {
+			padding: 40px 20px;
+			height: 90px;
+			text-align: center;
+			background-color: rgba(125, 124, 129, 0.8);
+			border-top: 1px solid #444;
+
+			h2 {
+				font-weight: normal;
+				font-size: 40px;
+				color: #ddd;
+			}
+			h5 {
+				font-weight: normal;
+				color: #bbb;
 			}
 		}
 	}
 }
+
+
+
+li.task {
+	position: relative;
+	display: inline-block;
+	width: 140px;
+	height: 170px;
+	text-align: center;
+	background-color: rgba(125, 124, 129, 0.8);
+	border-right: 1px solid #444;
+
+	span.text {
+		display: block;
+		padding: 15px;
+		white-space: normal;
+		font-size: 14px;
+		color: #bbb;
+	}
+	div.task-age {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 40px;
+		background-color: #56a6e1;
+	}
+}
+
 
 
 /* Dashboard Right Pane */
@@ -263,6 +381,10 @@ section#dashboard-pane {
 				margin-left: 10px;
 				vertical-align: top;
 				font-size: 30px;
+				cursor: pointer;
+			}
+			i:hover {
+				opacity: 0.7;
 			}
 			h2 {
 				margin-top: 20px;

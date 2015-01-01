@@ -19,7 +19,7 @@
 			<h1>LET'S BE PRODUCTIVE.</h1>
 			<div>
 				<i class="fa fa-user"></i>
-				<input type="email" id="login-email" placeholder="Email" />
+				<input type="email" id="login-email" placeholder="Email" spellcheck="false"/>
 			</div>
 			<div>
 				<i class="fa fa-key"></i>
@@ -100,7 +100,7 @@
 		<div class="pane">
 			<div class="pane-item pane-content pane-header">
 				<img src="/img/user.jpg" />
-				<i class="fa fa-sign-out"></i>
+				<i id="logout" class="fa fa-sign-out"></i>
 				<i class="fa fa-cog"></i>
 				<h2>Menu</h2>
 			</div>
@@ -135,31 +135,77 @@
 
 <!-- Commitment item -->
 <template name="commitment">
-	<li id="{{commitmentName}}" class="dashboard-commitment">
-		<div class="dashboard-commitment-left">
-			<div class="dashboard-commitment-top">
-				<i class="fa fa-circle"></i>
-				<h4>{{commitmentName}}</h4>
-				<button class="commitment-delete">&times;</button>
+
+	<li id="{{commitmentName}}" class="commitment">
+
+			<div class="tasks">
+				<div class="commitment-header">
+					<div class="left">
+						<i class="fa fa-circle"></i>
+						<h4>Commitment</h4>
+					</div>
+					<div class="right">
+						<i class="fa fa-ellipsis-v"></i>
+					</div>
+				</div>
+				<div class="move-left slide-button"><i class="fa fa-angle-left"></i></div>
+				<div class="task-list-wrapper">
+					<ul class="task-list">
+						<li class="task">
+							<span class="text">Task 1</span>
+							<div class="task-age"></div>
+						</li>
+						<li class="task">
+							<span class="text">Task 2</span>
+							<div class="task-age"></div>
+						</li>
+						<li class="task">
+							<span class="text">Task 3</span>
+							<div class="task-age"></div>
+						</li>
+						<li class="task">
+							<span class="text">Task 4</span>
+							<div class="task-age"></div>
+						</li>
+						<li class="task">
+							<span class="text">Task 5</span>
+							<div class="task-age"></div>
+						</li>
+						<li class="task">
+							<span class="text">Task 6</span>
+							<div class="task-age"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="move-right slide-button"><i class="fa fa-angle-right"></i></div>
 			</div>
-			{{> addTask}}
-			<ul>
-				{{#each tasks}}
-					{{> task}}
-				{{/each}}
-			</ul>
-		</div>
-		<div class="dashboard-commitment-right">
-			<h4>Progress</h4>
-		</div>
+			<div class="progress">
+				<div class="commitment-header">
+					<div class="left">
+						<i class="fa fa-circle"></i>
+						<h4>Progress</h4>
+					</div>
+					<div class="right">
+						<i class="fa fa-ellipsis-v"></i>
+					</div>
+				</div>
+				<div class="percentage">
+					<h2>72.15%</h2>
+					<h5>Complete</h5>
+				</div>
+			</div>
+
+
 	</li>
+
 </template>
 
 <!-- Task item -->
 <template name="task">
-	<li>
-		<button class="task-delete">&times;</button>
-		<input type="checkbox" checked="{{checked}}" class="task-toggle-checked" />
-		<span class="task">{{task}}</span>
+	<li class="task">
+		<!-- <button class="task-delete">&times;</button> -->
+		<!-- <input type="checkbox" checked="{{checked}}" class="task-toggle-checked" /> -->
+		<span>{{task}}</span>
+		<div class="task-age"></div>
 	</li>
 </template>
