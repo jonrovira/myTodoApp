@@ -218,6 +218,7 @@ li.commitment {
 	div.commitment-header {
 		padding: 20px;
 		background-color: rgba(125, 124, 129, 0.8);
+		border-bottom: 1px solid #444;
 		overflow: auto;
 
 		div.left {
@@ -232,6 +233,7 @@ li.commitment {
 			}
 			h4 {
 				display: inline-block;
+				vertical-align: middle;
 				font-weight: normal;
 				font-size: 16px;
 				color: #ccc;
@@ -267,7 +269,6 @@ li.commitment {
 			width: 30px;
 			height: 170px;
 			background-color: rgba(125, 124, 129, 0.8);
-			border-top: 1px solid #444;
 			cursor: pointer;
 			-webkit-user-select: none; /* webkit (safari, chrome) browsers */
 		    -moz-user-select: none; /* mozilla browsers */
@@ -301,13 +302,13 @@ li.commitment {
 				white-space: nowrap;
 				font-size: 0;
 				list-style: none;
-				border-top: 1px solid #444;
 			}
 		}
 	}
 	div.progress {
 		float: right;
 		width: 200px;
+		font-size: 0;
 
 		div.commitment-header {
 
@@ -323,7 +324,6 @@ li.commitment {
 			height: 90px;
 			text-align: center;
 			background-color: rgba(125, 124, 129, 0.8);
-			border-top: 1px solid #444;
 
 			h2 {
 				font-weight: normal;
@@ -332,6 +332,7 @@ li.commitment {
 			}
 			h5 {
 				font-weight: normal;
+				font-size: 15px;
 				color: #bbb;
 			}
 		}
