@@ -104,9 +104,9 @@
 				<i class="fa fa-cog"></i>
 				<h2>Menu</h2>
 			</div>
-			<div class="pane-item pane-section-header">
+			<div class="pane-item pane-section-header new-commitment">
 				<i class="fa fa-plus"></i>
-				<h3>COMMITMENTS</h3>
+				<h3>{{> addCommitment}}</h3>
 			</div>
 			<div class="pane-item pane-content pane-commitments">
 				<ul>
@@ -119,30 +119,15 @@
 	</section>
 </template>
 
-<!-- Add commitment form -->
-<template name="addCommitment">
-	<form>
-		<input type="text" name="commitment" placeholder="Add a new commitment" />
-	</form>
-</template>
-
-<!-- Add task form -->
-<template name="addTask">
-	<form>
-		<input type="text" name="task" placeholder="Add a new task" />
-	</form>
-</template>
-
 <!-- Commitment item -->
 <template name="commitment">
-
 	<li id="{{commitmentName}}" class="commitment">
-
 			<div class="tasks">
 				<div class="commitment-header">
 					<div class="left">
 						<i class="fa fa-circle"></i>
 						<h4>{{commitmentName}}</h4>
+						{{> addTask}}
 					</div>
 					<div class="right">
 						<i class="fa fa-ellipsis-v"></i>
@@ -173,10 +158,21 @@
 					<h5>Complete</h5>
 				</div>
 			</div>
-
-
 	</li>
+</template>
 
+<!-- Add commitment form -->
+<template name="addCommitment">
+	<form class="add-commitment">
+		<input type="text" name="commitment" placeholder="COMMITMENTS" />
+	</form>
+</template>
+
+<!-- Add task form -->
+<template name="addTask">
+	<form class="add-task">
+		<input type="text" name="task" placeholder="Add a new task" />
+	</form>
 </template>
 
 <!-- Task item -->
