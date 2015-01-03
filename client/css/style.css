@@ -170,6 +170,7 @@ li.commitment {
     li.commitment div.commitment-header div.right {
       float: right; }
       li.commitment div.commitment-header div.right i {
+        font-size: 16px;
         color: rgba(48, 56, 64, 0.8); }
   li.commitment div.tasks {
     float: left;
@@ -185,11 +186,23 @@ li.commitment {
       height: 170px;
       background-color: rgba(125, 124, 129, 0.8);
       border-top: 1px solid #444;
-      cursor: pointer; }
+      cursor: pointer;
+      -webkit-user-select: none;
+      /* webkit (safari, chrome) browsers */
+      -moz-user-select: none;
+      /* mozilla browsers */
+      -khtml-user-select: none;
+      /* webkit (konqueror) browsers */
+      -ms-user-select: none;
+      /* IE10+ */ }
       li.commitment div.tasks div.slide-button i {
         padding: 65px 9px;
         font-size: 30px;
         color: #555; }
+    li.commitment div.tasks div.slide-button:hover i {
+      color: #bbb; }
+    li.commitment div.tasks div.slide-button:active {
+      background-color: rgba(100, 100, 100, 0.8); }
     li.commitment div.tasks div.move-left {
       border-right: 1px solid #444; }
     li.commitment div.tasks div.move-right {
@@ -197,8 +210,11 @@ li.commitment {
     li.commitment div.tasks div.task-list-wrapper {
       display: inline-block;
       width: calc(100% - 62px);
+      height: 171px;
+      background-color: rgba(100, 100, 100, 0.8);
       overflow-x: hidden; }
       li.commitment div.tasks div.task-list-wrapper ul.task-list {
+        position: relative;
         white-space: nowrap;
         font-size: 0;
         list-style: none;
@@ -225,6 +241,7 @@ li.commitment {
 li.task {
   position: relative;
   display: inline-block;
+  vertical-align: top;
   width: 140px;
   height: 170px;
   text-align: center;

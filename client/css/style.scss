@@ -241,6 +241,7 @@ li.commitment {
 			float: right;
 
 			i {
+				font-size: 16px;
 				color: rgba(48, 56, 64, 0.8);
 			}
 		}
@@ -268,6 +269,10 @@ li.commitment {
 			background-color: rgba(125, 124, 129, 0.8);
 			border-top: 1px solid #444;
 			cursor: pointer;
+			-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+		    -moz-user-select: none; /* mozilla browsers */
+		    -khtml-user-select: none; /* webkit (konqueror) browsers */
+		    -ms-user-select: none; /* IE10+ */
 
 			i {
 				padding: 65px 9px;
@@ -275,14 +280,24 @@ li.commitment {
 				color: #555;
 			}
 		}
+		div.slide-button:hover {
+
+			i {
+				color: #bbb;
+			}
+		}
+		div.slide-button:active { background-color: rgba(100, 100, 100, 0.8); }
 		div.move-left { border-right: 1px solid #444; }
 		div.move-right { border-left: 1px solid #444; }
 		div.task-list-wrapper {
 			display: inline-block;
 			width: calc(100% - 62px);
+			height: 171px;
+			background-color: rgba(100, 100, 100, 0.8);
 			overflow-x: hidden;
 
 			ul.task-list {
+				position: relative;
 				white-space: nowrap;
 				font-size: 0;
 				list-style: none;
@@ -328,6 +343,7 @@ li.commitment {
 li.task {
 	position: relative;
 	display: inline-block;
+	vertical-align: top;
 	width: 140px;
 	height: 170px;
 	text-align: center;

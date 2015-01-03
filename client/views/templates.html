@@ -150,31 +150,10 @@
 				</div>
 				<div class="move-left slide-button"><i class="fa fa-angle-left"></i></div>
 				<div class="task-list-wrapper">
-					<ul class="task-list">
-						<li class="task">
-							<span class="text">Task 1</span>
-							<div class="task-age"></div>
-						</li>
-						<li class="task">
-							<span class="text">Task 2</span>
-							<div class="task-age"></div>
-						</li>
-						<li class="task">
-							<span class="text">Task 3</span>
-							<div class="task-age"></div>
-						</li>
-						<li class="task">
-							<span class="text">Task 4</span>
-							<div class="task-age"></div>
-						</li>
-						<li class="task">
-							<span class="text">Task 5</span>
-							<div class="task-age"></div>
-						</li>
-						<li class="task">
-							<span class="text">Task 6</span>
-							<div class="task-age"></div>
-						</li>
+					<ul class="task-list" style="left: 0">
+						{{#each tasks}}
+							{{> task}}
+						{{/each}}
 					</ul>
 				</div>
 				<div class="move-right slide-button"><i class="fa fa-angle-right"></i></div>
@@ -205,7 +184,7 @@
 	<li class="task">
 		<!-- <button class="task-delete">&times;</button> -->
 		<!-- <input type="checkbox" checked="{{checked}}" class="task-toggle-checked" /> -->
-		<span>{{task}}</span>
-		<div class="task-age"></div>
+		<span class="text">{{task}}</span>
+		<div class="task-age" style="height: 70px"></div>
 	</li>
 </template>

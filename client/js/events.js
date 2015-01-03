@@ -141,6 +141,67 @@ Template.commitment.events({
     },
     "click .commitment-delete": function() {   
         Meteor.call("deleteCommitment", this._id);
+    },
+    "click .move-left": function(e) {
+        // Get jQuery elements
+        var $wrap = $(e.target).parent().siblings('div.task-list-wrapper');
+        var $ul   = $wrap.children('ul.task-list');
+        var $li   = $ul.children('li.task');
+
+        // Stop any current animations
+        $ul.stop();
+
+        // Get element dimensions and positions
+        var liWidth = $li.width();
+        var firstPos = $ul.offset().left - $wrap.offset().left;
+
+        // Transition!
+        if (firstPos < (-1 * liWidth)) {
+            $ul.transition({
+                left: "+=" + liWidth
+            }, {
+                duration: 200
+            });
+        }
+        else {
+            $ul.transition({
+                left: "0"
+            }, {
+                duration: 200
+            });
+        }
+    },
+    "click .move-right": function(e) {
+        // Get jQuery elements
+        var $wrap = $(e.target).parent().siblings('div.task-list-wrapper');
+        var $ul   = $wrap.children('ul.task-list');
+        var $li   = $ul.children('li.task');
+
+        // Stop any current animations
+        $ul.stop();
+
+        // Get element dimensions and positions
+        var wrapWidth = $wrap.width();
+        var ulWidth = $ul.width();
+        var liWidth = $li.width();
+        var firstPos = $ul.offset().left - $wrap.offset().left;
+        var hidden = ulWidth - wrapWidth + firstPos;
+
+        // Transition!
+        if (hidden > liWidth) {
+            $ul.transition({
+                left: "+=" + (-1 * liWidth)
+            }, {
+                duration: 200
+            });
+        }
+        else {
+            $ul.transition({
+                left: (-1 * (ulWidth - wrapWidth))
+            }, {
+                duration: 200
+            });
+        }
     }
 });
 
