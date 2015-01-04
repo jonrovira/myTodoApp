@@ -19,11 +19,13 @@ Router.route('/', function() {
     }
 });
 
+
 /* Register */
 Router.route('/register/', function() {
 	
     this.render('register');
 });
+
 
 /* Dashboard */
 Router.route('/dashboard/', function() {
@@ -35,14 +37,6 @@ Router.route('/dashboard/', function() {
     }
 });
 
-Router.route('/old/', function() {
-    if (Meteor.userId()) {
-        this.render('home');
-    }
-    else {
-        this.redirect('/');
-    }
-});
 
 /* On POST from Twilio */
 Router.route('/text/', function(){

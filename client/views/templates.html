@@ -42,25 +42,13 @@
 	</form>
 </template>
 
-<!-- Home route -->
-<template name="home">
-	<h1>Jon Rovira's Todo List ({{incompleteCount}})</h1>
-	<button id="logout">Log out</button>
-	{{> addCommitment}}
-
-	<ul>
-		{{#each commitments}}
-			{{> commitment}}
-		{{/each}}
-	</ul>
-</template>
 
 <!-- Dashboard route-->
 <template name="dashboard">
 	<section id="dashboard">
 		{{> dashboardHeader}}
 		{{> dashboardPane}}
-		{{> dashboardMain}}
+		{{> dashboardMain}}	
 	</section>
 </template>
 
@@ -132,8 +120,6 @@
 				<div class="right">
 					<div class="commitment-options">
 						<button class="commitment-delete">&times;</button>
-						<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" id="commitment-toggle-checked-{{commitmentName}}" />
-						<label for="task-toggle-checked-{{commitmentName}}"><span>&#10003;</span></label>
 					</div>
 					<i class="fa fa-ellipsis-v"></i>
 				</div>

@@ -86,13 +86,6 @@ Template.register.events({
     }
 });
 
-/* home */
-Template.home.events({
-    "click #logout": function() {
-        Meteor.logout();
-    }
-});
-
 /* dashboardPane */
 Template.dashboardPane.events({
     "click #logout": function() {
@@ -139,7 +132,7 @@ Template.commitment.events({
     "click .commitment-toggle-checked": function() {
         Meteor.call("setCommitmentChecked", this._id, !this.checked);
     },
-    "click .commitment-delete": function() {   
+    "click button.commitment-delete": function() {   
         Meteor.call("deleteCommitment", this._id);
     },
     "click .move-left": function(e) {

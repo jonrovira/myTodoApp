@@ -2,15 +2,6 @@
  * TEMPLATE HELPERS
  */
 
-/* home */
-Template.home.helpers({
-    commitments: function() {
-        return Commitments.find({}, {sort: {createdAt: -1}});
-    },
-    incompleteCount: function () {
-        return Tasks.find({checked: {$ne: true}}).count();
-    }
-});
 
 /* dashboardMain */
 Template.dashboardMain.helpers({

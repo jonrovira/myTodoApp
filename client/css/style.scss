@@ -1,5 +1,5 @@
-$color_commitment:      rgba(205, 205, 205, 0.8);
-$color_task_wrap:       rgba(185, 185, 185, 0.5);
+$color_commitment:      rgba(255, 255, 255, 0.8);
+$color_task_wrap:       rgba(225, 225, 225, 0.5);
 $color_commitment_text: #444;
 $color_task_text:       #555;
 $color_percentage_text: #555;
@@ -204,21 +204,27 @@ section#dashboard-main {
 	overflow-y: scroll;
 
 	div.dashboard-main {
+		box-shadow: 7px 0 17px #333, -7px 0 17px #333;
 
 		> ul {
 			list-style: none;
 
 			> li {
-				margin-bottom: 20px;
+				margin-bottom: 15px;
+			}
+			> li:last-child {
+				margin-bottom: 0;
 			}
 		}
 	}
 }
 
 
+
 /* Commitment */
 li.commitment {
 	width: 100%;
+	box-shadow: 0 3px 7px #333;
 	overflow: auto;
 
 	div.commitment-header {
@@ -235,8 +241,7 @@ li.commitment {
 				display: inline-block;
 				margin-right: 15px;
 				vertical-align: middle;
-				font-size: 9px;	
-				color: #60d3d3;
+				font-size: 9px;
 			}
 			h4 {
 				display: inline-block;
@@ -263,11 +268,12 @@ li.commitment {
 		font-size: 0;
 
 		div.commitment-header {
+			padding-right: 10px;
 
 			div.left {
 
 				i {
-					color: #60d3d3;
+					color: #88db61;
 				}
 				h4 {
 					margin-right: 15px;
@@ -284,6 +290,7 @@ li.commitment {
 					display: none;
 				}
 				i {
+					padding: 0 10px;
 					cursor: pointer;
 				}
 			}
@@ -291,8 +298,8 @@ li.commitment {
 
 				div.commitment-options {
 					position: absolute;
-					top: -16px;
-					left: -40px;
+					top: -7px;
+					left: -28px;
 					display: inline-block;
 					padding: 5px 3px;
 					width: 20px;
@@ -301,7 +308,6 @@ li.commitment {
 
 					button.commitment-delete {
 						display: inline-block;
-						margin-bottom: 5px;
 						vertical-align: top;
 						width: 19px;
 						height: 19px;
@@ -316,47 +322,16 @@ li.commitment {
 						color: #fff;
 						background-color: #FA6B5B;
 					}
-					input.commitment-toggle-checked {
-						display: none;
-					}
-					input.commitment-toggle-checked + label {
-						position: relative;
-						display: inline-block;
-						width: 19px;
-						height: 19px;
-						background-color: #fff;
-						border-radius: 50%;
-						cursor: pointer;
-						-webkit-user-select: none; /* webkit (safari, chrome) browsers */
-					    -moz-user-select: none; /* mozilla browsers */
-					    -khtml-user-select: none; /* webkit (konqueror) browsers */
-					    -ms-user-select: none; /* IE10+ */
-
-						span {
-							position: absolute;
-							top: 2px;
-							left: 5px;
-							font-size: 11px;
-							color: #8ad961;
-						}
-					}
-					input.commitment-toggle-checked:checked + label {
-						background-color: #8ad961;
-
-						span {
-							color: #fff;
-						}
-					}
 				}
 				div.commitment-options::after {
 					position: absolute;
-					top: 12px;
+					top: 7px;
 					left: 26px;
 					width: 0;
 					height: 0;
-					border-top: 12px solid transparent;
-					border-left: 10px solid rgba(50, 50, 50, 0.5);
-					border-bottom: 12px solid transparent;
+					border-top: 7px solid transparent;
+					border-left: 8px solid rgba(50, 50, 50, 0.5);
+					border-bottom: 7px solid transparent;
 					content: "";
 				}
 				i {
@@ -394,7 +369,7 @@ li.commitment {
 		div.task-list-wrapper {
 			display: inline-block;
 			width: calc(100% - 62px);
-			height: 171px;
+			height: 170px;
 			background-color: $color_task_wrap;
 			overflow-x: hidden;
 
@@ -416,7 +391,7 @@ li.commitment {
 			div.left {
 
 				i {
-					color: #88db61;
+					color: #C363C5;
 				}
 			}
 		}
@@ -439,6 +414,7 @@ li.commitment {
 		}
 	}
 }
+
 
 
 /* Task */
@@ -541,12 +517,13 @@ li.task.active {
 }
 
 
+
 /* Add Task */
 form.add-task {
 
 	input {
 		padding: 4px 7px 4px 10px;
-		color: #bbb;
+		color: #ccc;
 		background-color: rgba(100, 100, 100, 0.8);
 		border: none;
 		border-radius: 10px;
@@ -559,6 +536,7 @@ form.add-task {
 		background-color: rgba(90, 90, 90, 0.8);
 	}
 }
+
 
 
 /* Add Commitment */
@@ -578,6 +556,7 @@ form.add-commitment {
 		background-color: #eee;
 	}
 }
+
 
 
 /* Dashboard Right Pane */
