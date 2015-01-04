@@ -188,6 +188,76 @@ li.commitment {
     li.commitment div.tasks div.commitment-header div.left form.add-task {
       display: inline-block;
       vertical-align: middle; }
+    li.commitment div.tasks div.commitment-header div.right {
+      position: relative; }
+      li.commitment div.tasks div.commitment-header div.right div.commitment-options {
+        display: none; }
+      li.commitment div.tasks div.commitment-header div.right i {
+        cursor: pointer; }
+    li.commitment div.tasks div.commitment-header div.right.active div.commitment-options {
+      position: absolute;
+      top: -16px;
+      left: -40px;
+      display: inline-block;
+      padding: 5px 3px;
+      width: 20px;
+      background-color: rgba(50, 50, 50, 0.5);
+      border-radius: 3px; }
+      li.commitment div.tasks div.commitment-header div.right.active div.commitment-options button.commitment-delete {
+        display: inline-block;
+        margin-bottom: 5px;
+        vertical-align: top;
+        width: 19px;
+        height: 19px;
+        color: #FA6B5B;
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        outline: none;
+        cursor: pointer; }
+      li.commitment div.tasks div.commitment-header div.right.active div.commitment-options button.commitment-delete:active {
+        color: #fff;
+        background-color: #FA6B5B; }
+      li.commitment div.tasks div.commitment-header div.right.active div.commitment-options input.commitment-toggle-checked {
+        display: none; }
+      li.commitment div.tasks div.commitment-header div.right.active div.commitment-options input.commitment-toggle-checked + label {
+        position: relative;
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        -webkit-user-select: none;
+        /* webkit (safari, chrome) browsers */
+        -moz-user-select: none;
+        /* mozilla browsers */
+        -khtml-user-select: none;
+        /* webkit (konqueror) browsers */
+        -ms-user-select: none;
+        /* IE10+ */ }
+        li.commitment div.tasks div.commitment-header div.right.active div.commitment-options input.commitment-toggle-checked + label span {
+          position: absolute;
+          top: 2px;
+          left: 5px;
+          font-size: 11px;
+          color: #8ad961; }
+      li.commitment div.tasks div.commitment-header div.right.active div.commitment-options input.commitment-toggle-checked:checked + label {
+        background-color: #8ad961; }
+        li.commitment div.tasks div.commitment-header div.right.active div.commitment-options input.commitment-toggle-checked:checked + label span {
+          color: #fff; }
+    li.commitment div.tasks div.commitment-header div.right.active div.commitment-options::after {
+      position: absolute;
+      top: 12px;
+      left: 26px;
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-left: 10px solid rgba(50, 50, 50, 0.5);
+      border-bottom: 12px solid transparent;
+      content: ""; }
+    li.commitment div.tasks div.commitment-header div.right.active i {
+      color: rgba(90, 90, 90, 0.8); }
     li.commitment div.tasks div.slide-button {
       display: inline-block;
       vertical-align: top;
@@ -266,7 +336,8 @@ li.task {
       background-color: #fff;
       border: 1px solid #bbb;
       border-radius: 50%;
-      outline: none; }
+      outline: none;
+      cursor: pointer; }
     li.task div.task-options button.task-delete:active {
       color: #fff;
       background-color: #FA6B5B;
@@ -282,6 +353,7 @@ li.task {
       background-color: #fff;
       border: 1px solid #bbb;
       border-radius: 50%;
+      cursor: pointer;
       -webkit-user-select: none;
       /* webkit (safari, chrome) browsers */
       -moz-user-select: none;
@@ -310,7 +382,7 @@ li.task {
     width: calc(100% - 55px);
     white-space: normal;
     word-wrap: break-word;
-    font-size: 13px;
+    font-size: 12px;
     color: #555;
     z-index: 100; }
   li.task div.task-age {

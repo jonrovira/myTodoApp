@@ -122,42 +122,47 @@
 <!-- Commitment item -->
 <template name="commitment">
 	<li id="{{commitmentName}}" class="commitment">
-			<div class="tasks">
-				<div class="commitment-header">
-					<div class="left">
-						<i class="fa fa-circle"></i>
-						<h4>{{commitmentName}}</h4>
-						{{> addTask}}
-					</div>
-					<div class="right">
-						<i class="fa fa-ellipsis-v"></i>
-					</div>
+		<div class="tasks">
+			<div class="commitment-header">
+				<div class="left">
+					<i class="fa fa-circle"></i>
+					<h4>{{commitmentName}}</h4>
+					{{> addTask}}
 				</div>
-				<div class="move-left slide-button"><i class="fa fa-angle-left"></i></div>
-				<div class="task-list-wrapper">
-					<ul class="task-list" style="left: 0">
-						{{#each tasks}}
-							{{> task}}
-						{{/each}}
-					</ul>
-				</div>
-				<div class="move-right slide-button"><i class="fa fa-angle-right"></i></div>
-			</div>
-			<div class="progress">
-				<div class="commitment-header">
-					<div class="left">
-						<i class="fa fa-circle"></i>
-						<h4>Progress</h4>
+				<div class="right">
+					<div class="commitment-options">
+						<button class="commitment-delete">&times;</button>
+						<input type="checkbox" checked="{{checked}}" class="commitment-toggle-checked" id="commitment-toggle-checked-{{commitmentName}}" />
+						<label for="task-toggle-checked-{{commitmentName}}"><span>&#10003;</span></label>
 					</div>
-					<div class="right">
-						<i class="fa fa-ellipsis-v"></i>
-					</div>
-				</div>
-				<div class="percentage">
-					<h2>72.15%</h2>
-					<h5>Complete</h5>
+					<i class="fa fa-ellipsis-v"></i>
 				</div>
 			</div>
+			<div class="move-left slide-button"><i class="fa fa-angle-left"></i></div>
+			<div class="task-list-wrapper">
+				<ul class="task-list" style="left: 0">
+					{{#each tasks}}
+						{{> task}}
+					{{/each}}
+				</ul>
+			</div>
+			<div class="move-right slide-button"><i class="fa fa-angle-right"></i></div>
+		</div>
+		<div class="progress">
+			<div class="commitment-header">
+				<div class="left">
+					<i class="fa fa-circle"></i>
+					<h4>Progress</h4>
+				</div>
+				<div class="right">
+					<i class="fa fa-ellipsis-v"></i>
+				</div>
+			</div>
+			<div class="percentage">
+				<h2>72.15%</h2>
+				<h5>Complete</h5>
+			</div>
+		</div>
 	</li>
 </template>
 

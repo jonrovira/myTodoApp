@@ -202,6 +202,18 @@ Template.commitment.events({
                 duration: 200
             });
         }
+    },
+    "click div.tasks div.commitment-header div.right": function(e) {
+        // get jQuery element
+        $el = $(e.target);
+
+        // correctly select div.right
+        if (! $el.hasClass('right')) {
+            $el = $el.parents('div.right');
+        }
+
+        // toggle active class
+        $el.toggleClass('active');
     }
 });
 
