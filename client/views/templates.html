@@ -178,8 +178,11 @@
 <!-- Task item -->
 <template name="task">
 	<li class="task">
-		<!-- <button class="task-delete">&times;</button> -->
-		<!-- <input type="checkbox" checked="{{checked}}" class="task-toggle-checked" /> -->
+		<div class="task-options">
+			<button class="task-delete">&times;</button>
+			<input type="checkbox" checked="{{checked}}" id="task-toggle-checked-{{task}}" class="task-toggle-checked" />
+			<label for="task-toggle-checked-{{task}}"><span>&#10003;</span></label>
+		</div>
 		<span class="text">{{task}}</span>
 		<div class="task-age" style="height: 70px"></div>
 	</li>

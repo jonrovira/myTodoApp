@@ -212,5 +212,22 @@ Template.task.events({
     },
     "click .task-delete": function() {
         Meteor.call("deleteTask", this._id);
-    }
+    },
+    "click li.task": function(e) {
+        // get clicked element
+        var $el = $(e.target);
+
+        // get respective task element
+        if (! $el.hasClass('task')) {
+            $el = $el.parents('li.task');
+        }
+
+        // give active class to element
+        if (! $el.hasClass('active')) {
+            $('li.task').removeClass('active');
+            $el.addClass('active');
+        }
+
+        return;
+    },
 });
