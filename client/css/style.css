@@ -1,3 +1,4 @@
+/* Sass Variables */
 /* Fonts */
 @font-face {
   font-family: "Dense-Regular";
@@ -157,7 +158,7 @@ li.commitment {
   overflow: auto; }
   li.commitment div.commitment-header {
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(91, 104, 113, 0.85);
     border-bottom: 1px solid #444;
     overflow: auto;
     z-index: 50; }
@@ -173,7 +174,7 @@ li.commitment {
         vertical-align: middle;
         font-weight: normal;
         font-size: 16px;
-        color: #444; }
+        color: #ccc; }
     li.commitment div.commitment-header div.right {
       float: right; }
       li.commitment div.commitment-header div.right i {
@@ -241,7 +242,7 @@ li.commitment {
       vertical-align: top;
       width: 30px;
       height: 170px;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(91, 104, 113, 0.85);
       cursor: pointer;
       -webkit-user-select: none;
       /* webkit (safari, chrome) browsers */
@@ -254,11 +255,11 @@ li.commitment {
       li.commitment div.tasks div.slide-button i {
         padding: 65px 9px;
         font-size: 30px;
-        color: #555; }
+        color: #aaa; }
     li.commitment div.tasks div.slide-button:hover i {
-      color: #888; }
+      color: #bbb; }
     li.commitment div.tasks div.slide-button:active {
-      background-color: rgba(130, 130, 130, 0.8); }
+      background-color: rgba(77, 88, 96, 0.85); }
     li.commitment div.tasks div.move-left {
       border-right: 1px solid #444; }
     li.commitment div.tasks div.move-right {
@@ -267,7 +268,7 @@ li.commitment {
       display: inline-block;
       width: calc(100% - 62px);
       height: 170px;
-      background-color: rgba(225, 225, 225, 0.5);
+      background-color: rgba(91, 104, 113, 0.5);
       overflow-x: hidden; }
       li.commitment div.tasks div.task-list-wrapper ul.task-list {
         position: relative;
@@ -284,15 +285,15 @@ li.commitment {
       padding: 40px 20px;
       height: 90px;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.8); }
+      background-color: rgba(91, 104, 113, 0.85); }
       li.commitment div.progress div.percentage h2 {
         font-weight: normal;
         font-size: 40px;
-        color: #555; }
+        color: #eee; }
       li.commitment div.progress div.percentage h5 {
         font-weight: normal;
         font-size: 15px;
-        color: #444; }
+        color: #ccc; }
 
 /* Task */
 li.task {
@@ -301,7 +302,7 @@ li.task {
   vertical-align: top;
   width: 140px;
   height: 170px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(91, 104, 113, 0.85);
   border-right: 1px solid #444;
   z-index: 100; }
   li.task div.task-options {
@@ -361,15 +362,13 @@ li.task {
     white-space: normal;
     word-wrap: break-word;
     font-size: 12px;
-    color: #555;
+    color: #bbb;
     z-index: 100; }
   li.task div.task-age {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40px;
-    background-color: #725da2;
     z-index: 50; }
 
 li.task.active {
@@ -383,14 +382,14 @@ li.task.active {
 form.add-task input {
   padding: 4px 7px 4px 10px;
   color: #ccc;
-  background-color: rgba(100, 100, 100, 0.8);
+  background-color: rgba(120, 120, 120, 0.8);
   border: none;
   border-radius: 10px;
   outline: none; }
 form.add-task input:hover {
-  background-color: rgba(105, 105, 105, 0.8); }
+  background-color: rgba(125, 125, 125, 0.8); }
 form.add-task input:focus {
-  background-color: rgba(90, 90, 90, 0.8); }
+  background-color: rgba(110, 110, 110, 0.8); }
 
 /* Add Commitment */
 form.add-commitment input {
@@ -436,7 +435,7 @@ section#dashboard-pane div.pane {
   section#dashboard-pane div.pane div.pane-content.pane-commitments ul {
     list-style: none; }
     section#dashboard-pane div.pane div.pane-content.pane-commitments ul li {
-      margin-bottom: 27px;
+      margin-bottom: 15px;
       cursor: pointer; }
       section#dashboard-pane div.pane div.pane-content.pane-commitments ul li i {
         margin-right: 24px;

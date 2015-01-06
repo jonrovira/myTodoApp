@@ -8,7 +8,7 @@
 var trimInput = function(val) {
 
     return val.replace(/^\s*|\s*$/g, "");
-}
+};
 var isValidPassword = function(val, field) {
     if (val.length >= 6) {
         return true;
@@ -17,7 +17,7 @@ var isValidPassword = function(val, field) {
         Session.set('displayMessage', 'Error &amp; Too short.');
         return false;
     }
-}
+};
 
 
 

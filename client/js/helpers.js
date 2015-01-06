@@ -22,5 +22,13 @@ Template.commitment.helpers({
     tasks: function() {
         var commitmentId = this._id;
         return Tasks.find({commitmentId: commitmentId}, {sort: {createdAt: -1}});
+    },
+    progress: function() {
+        var commitmentId = this._id;
+        var done  = Tasks.find({commitmentId: commitmentId, checked: true}).count();
+        var total = Tasks.find({commitmentId: commitmentId}).count();
+        var percent = done / total;
+        percent += "%";
+        return percent;
     }
 });

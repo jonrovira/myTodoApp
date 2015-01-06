@@ -42,7 +42,6 @@
 	</form>
 </template>
 
-
 <!-- Dashboard route-->
 <template name="dashboard">
 	<section id="dashboard">
@@ -145,7 +144,7 @@
 				</div>
 			</div>
 			<div class="percentage">
-				<h2>72.15%</h2>
+				<h2>{{progress}}</h2>
 				<h5>Complete</h5>
 			</div>
 		</div>
@@ -175,6 +174,6 @@
 			<label for="task-toggle-checked-{{task}}"><span>&#10003;</span></label>
 		</div>
 		<span class="text">{{task}}</span>
-		<div class="task-age" style="height: 70px"></div>
+		<div class="task-age"></div>
 	</li>
 </template>
