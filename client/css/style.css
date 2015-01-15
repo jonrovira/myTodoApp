@@ -306,17 +306,22 @@ li.task {
   border-right: 1px solid #444;
   z-index: 100; }
   li.task div.task-options {
+    position: relative;
     display: none;
     float: right;
     margin: 15px 15px 0 0; }
     li.task div.task-options button.task-delete {
+      position: absolute;
+      top: 0;
+      left: -15px;
       display: block;
       color: #FA6B5B;
       background-color: #fff;
       border: 1px solid #bbb;
       border-radius: 50%;
       outline: none;
-      cursor: pointer; }
+      cursor: pointer;
+      z-index: 100; }
     li.task div.task-options button.task-delete:active {
       color: #fff;
       background-color: #FA6B5B;
@@ -324,9 +329,10 @@ li.task {
     li.task div.task-options input.task-toggle-checked {
       display: none; }
     li.task div.task-options input.task-toggle-checked + label {
-      position: relative;
+      position: absolute;
       display: block;
-      margin-top: 5px;
+      top: 25px;
+      left: -15px;
       width: 19px;
       height: 19px;
       background-color: #fff;
@@ -340,7 +346,8 @@ li.task {
       -khtml-user-select: none;
       /* webkit (konqueror) browsers */
       -ms-user-select: none;
-      /* IE10+ */ }
+      /* IE10+ */
+      z-index: 100; }
       li.task div.task-options input.task-toggle-checked + label span {
         position: absolute;
         top: 2px;
@@ -377,6 +384,9 @@ li.task.active {
     display: block; }
   li.task.active span.text {
     color: #444; }
+
+li.task.checked div.task-age {
+  background-color: #C363C5 !important; }
 
 /* Add Task */
 form.add-task input {

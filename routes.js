@@ -51,9 +51,10 @@ Router.route('/text/', function(){
 
     // search for commitment
     var commitmentId = Commitments.findOne({normalizedName: commitment.toLowerCase()})._id;
+    var checked = false;
 
     // add task
-    Meteor.call("addTask", task, commitmentId)
+    Meteor.call("addTask", task, commitmentId, checked)
 
     // respond to text
     var reply = '<?xml version="1.0" encoding="UTF-8" ?>\<Response><Message><Body>|&#13;&#13;New task has successfully been added!&#13;     Commitment: ' + commitment + '&#13;     Task: ' + task + '</Body></Message></Response>'

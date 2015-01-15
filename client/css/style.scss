@@ -329,8 +329,7 @@ li.commitment {
 					}
 				}
 				div.commitment-options::after {
-					position: absolute;
-					top: 7px;
+					position: absolute; top: 7px;
 					left: 26px;
 					width: 0;
 					height: 0;
@@ -434,11 +433,15 @@ li.task {
 	z-index: 100;
 
 	div.task-options {
+		position: relative;
 		display: none;
 		float: right;
 		margin: 15px 15px 0 0;
 
 		button.task-delete {
+			position: absolute;
+			top: 0;
+			left: -15px;
 			display: block;
 			color: #FA6B5B;
 			background-color: #fff;
@@ -446,6 +449,7 @@ li.task {
 			border-radius: 50%;
 			outline: none;
 			cursor: pointer;
+			z-index: 100;
 		}
 		button.task-delete:active {
 			color: #fff;
@@ -456,9 +460,10 @@ li.task {
 			display: none;
 		}
 		input.task-toggle-checked + label {
-			position: relative;
+			position: absolute;
 			display: block;
-			margin-top: 5px;
+			top: 25px;
+			left: -15px;
 			width: 19px;
 			height: 19px;
 			background-color: #fff;
@@ -469,6 +474,7 @@ li.task {
 		    -moz-user-select: none; /* mozilla browsers */
 		    -khtml-user-select: none; /* webkit (konqueror) browsers */
 		    -ms-user-select: none; /* IE10+ */
+		    z-index: 100;
 
 			span {
 				position: absolute;
@@ -516,6 +522,13 @@ li.task.active {
 	}
 	span.text {
 		color: #444;
+	}
+}
+li.task.checked {
+
+
+	div.task-age {
+		background-color: #C363C5 !important;
 	}
 }
 

@@ -10,3 +10,10 @@ My goals for this project are to learn Meteor to a proficient level and also bui
 
 ####To add:
 * http://codyhouse.co/gem/3d-rotating-navigation/
+* Pane clicking
+* Complete coloring
+* Rename commitment
+* Texting functionality
+  * List commitments
+  * List tasks for commitment
+  * Check off task

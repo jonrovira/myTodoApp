@@ -27,7 +27,7 @@ Template.commitment.helpers({
         var commitmentId = this._id;
         var done  = Tasks.find({commitmentId: commitmentId, checked: true}).count();
         var total = Tasks.find({commitmentId: commitmentId}).count();
-        var percent = done / total;
+        var percent = Math.ceil(done / total * 10000) / 100;
         percent += "%";
         return percent;
     }

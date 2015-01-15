@@ -167,7 +167,7 @@
 
 <!-- Task item -->
 <template name="task">
-	<li class="task">
+	<li class="task {{#if checked}}checked{{/if}}">
 		<div class="task-options">
 			<button class="task-delete">&times;</button>
 			<input type="checkbox" checked="{{checked}}" id="task-toggle-checked-{{task}}" class="task-toggle-checked" />

@@ -5,10 +5,11 @@
 Meteor.methods({
 
     /* Add item to commitments collection */
-    addCommitment: function (original, normalized) {
+    addCommitment: function (original, normalized, concatenized) {
         Commitments.insert({
             commitmentName: original,
             normalizedName: normalized,
+            concatenizedName: concatenized,
             createdAt: new Date()
         });
     },
@@ -20,10 +21,11 @@ Meteor.methods({
     },
 
     /* Add item to tasks collection */
-    addTask: function (taskContent, commitmentId) {
+    addTask: function (taskContent, commitmentId, checked) {
         Tasks.insert({
             task: taskContent,
             commitmentId: commitmentId,
+            checked: checked,
             createdAt: new Date(),
         });
     },

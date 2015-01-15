@@ -2,31 +2,43 @@
  * METEOR INTERVALS
  */
 
+// Helper Functions
+ var arrayToRgb = function(a) {
+ 	return "rgb(" + a[0] + ", " + a[1] + ", " + a[2] + ")";
+ }
+ var interpolateColor = function(min, max, frac) {
+ 	var dr = max[0] - min[0];
+ 	var dg = max[1] - min[1];
+ 	var db = max[2] - min[2];
+ 	var color = [Math.round((dr * frac) + min[0]), 
+	             Math.round((dg * frac) + min[1]),
+	             Math.round((db * frac) + min[2])];
+	return arrayToRgb(color);
+ }
+
+
 
 var updateTaskAge = function(age, createdAt) {
-	var startColor = [136, 219, 97];
-	var endColor   = [250, 107, 91];
-	var endColorString = "rgb(" + endColor[0] + ", " + endColor[1] + ", " + endColor[2] + ")";
-	var dr = endColor[0] - startColor[0];
-	var dg = endColor[1] - startColor[1];
-	var db = endColor[2] - startColor[2];
+	var minColor  = [136, 219, 97];
+	var maxColor  = [250, 107, 91];
+	var doneColor = [114, 92, 164];
+	var maxRgb    = arrayToRgb(maxColor);
+	var doneRgb   = arrayToRgb(doneColor);
 
 	var diff = new Date() - createdAt;
-	var frac = diff / 86400000;
+	var frac = diff / 86400000; //86400000 ms per day
 	var yMax = $('li.task').height();
 	var yNew = Math.round(yMax * frac);
-	var cNew = [Math.round((dr * frac) + startColor[0]), 
-	            Math.round((dg * frac) + startColor[1]),
-	            Math.round((db * frac) + startColor[2])];
-	var cString = "rgb(" + cNew[0] + ", " + cNew[1] + ", " + cNew[2] + ")";
+
+	var newRgb = interpolateColor(minColor, maxColor, frac);
 
 	if (yNew < yMax) {
 		$(age).height(yNew);
-		$(age).css('background-color', cString);
+		$(age).css('background-color', newRgb);
 	}
 	else {
 		$(age).height(yMax);
-		$(age).css('background-color', endColorString);
+		$(age).css('background-color', maxRgb);
 	}
 };
 

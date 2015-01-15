@@ -90,6 +90,18 @@ Template.register.events({
 Template.dashboardPane.events({
     "click #logout": function() {
         Meteor.logout();
+    },
+    "click div.pane-commitments > ul > li": function(e) {
+        // Get list element before proceeding
+        var $el = $(e.target);
+        if (! $el.is('li')) {
+            $el = $el.parent();
+        }
+
+
+        var commitmentName    = $el.children('span').html();
+        var $corresCommitment = $('li.commitment#' + commitmentName);
+        $corresCommitment.hide();
     }
 });
 
@@ -98,11 +110,24 @@ Template.addCommitment.events({
     "submit form": function(event) {
 
         // Get new commitment string
-        var original = event.target.commitment.value;
-        normalized = original.toLowerCase();
+        var original     = event.target.commitment.value;
+        var normalized   = original.toLowerCase();
+        var concatenized = "";
+
+        // Get concatenized string
+        var split = normalized.split(" ");
+        if (split.length == 1) {
+            concatenized = split[0];
+        }
+        else {
+            for (var i=0; i<split.length-1; i++) {
+                concatenized += split[i] + "_";
+            }
+            concatenized += split[split.length-1];
+        }
 
         // Add commitment to commitments collection
-        Meteor.call("addCommitment", original, normalized);
+        Meteor.call("addCommitment", original, normalized, concatenized);
 
         // Cleanup: clear input, void default submit
         event.target.commitment.value = "";
@@ -117,9 +142,10 @@ Template.addTask.events({
         // Get new task string
         var taskContent  = event.target.task.value;
         var commitmentId = template.data._id;
+        var checked = false;
 
         // Add task to tasks collection
-        Meteor.call("addTask", taskContent, commitmentId);
+        Meteor.call("addTask", taskContent, commitmentId, checked);
 
         // Cleanup: clear input, void default submit
         event.target.task.value = "";
